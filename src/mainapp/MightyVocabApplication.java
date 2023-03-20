@@ -8,6 +8,9 @@ import javafx.stage.Stage;
 
 public class MightyVocabApplication extends Application {
 //vm arguments: --module-path "${eclipse_home}/javafx-sdk-18.0.2/lib" --add-modules javafx.controls,javafx.fxml
+	
+	private static final String SERVER_PATH = "../../../server/main.py";
+	
 	@Override
 	public void start(Stage primaryStage) {
 		try {

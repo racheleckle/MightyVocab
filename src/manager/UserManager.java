@@ -28,6 +28,16 @@ public class UserManager {
 		return this.users;
 	}
 	
+	/**
+	 * Adds a user
+	 * 
+	 * @precondition none
+	 * @postcondition none
+	 * 
+	 * @param username
+	 * @param password
+	 * @return
+	 */
 	public boolean addUser(String username, String password) {
 		if (username == null) {
 			throw new IllegalArgumentException("username cannot be null");
