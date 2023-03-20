@@ -1,5 +1,11 @@
 package model_classes;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import manager.RequestManager;
+import manager.UserManager;
+
 /**
  * User Class
  * 
@@ -87,5 +93,31 @@ public class User {
 	@Override
 	public String toString() {
 		return this.username + resources.ResourceMessages.SEPARATOR + this.password;
+	}
+	
+	public JSONObject toJSON() {
+		JSONObject json = new JSONObject();
+		
+		try {
+			json.put("__user__", true);
+			json.put("username", this.username);
+			json.put("password", this.password);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return json;
+	}
+	
+	public static User fromJSON(JSONObject json) throws JSONException {
+		UserManager requestManager = UserManager.getInstance();
+		
+		String username = json.getString("username");
+		String password = json.getString("password");
+		
+		User user = new User(username, password);
+		
+		return user;
 	}
 }

@@ -46,17 +46,17 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/mlee16/Desktop/java-json.jar">
+	<classpathentry kind="lib" path="C:/Users/mlee16/Desktop/MightyVocab/java-json.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/mlee16/Desktop/jeromq-0.5.3.jar">
+	<classpathentry kind="lib" path="C:/Users/mlee16/Desktop/MightyVocab/jeromq-0.5.3.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/mlee16/Desktop/jnacl-1.0.0.jar">
+	<classpathentry kind="lib" path="C:/Users/mlee16/Desktop/MightyVocab/jnacl-1.0.0.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
