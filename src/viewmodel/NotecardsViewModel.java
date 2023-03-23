@@ -1,5 +1,6 @@
 package viewmodel;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -19,8 +20,17 @@ public class NotecardsViewModel {
 	private Label createNotecardLabel;
 	private Button addButton;
 	private Button doneButton;
+	
+	private StringProperty termTextProperty;
+	private StringProperty definitionTextProperty;
 
 	public NotecardsViewModel() {
+		
+		
+		this.termTextProperty = new SimpleStringProperty();
+		this.definitionTextProperty = new SimpleStringProperty();
+		
+		
 		this.setNotecards(notecards);
 		this.setNotecardsTableView(notecardsTableView);
 		this.setTermTableColumn(termTableColumn);
@@ -30,9 +40,17 @@ public class NotecardsViewModel {
 		this.setAddButton(addButton);
 		this.setDoneButton(doneButton);
 	}
+	
+	public StringProperty definitionTextProperty() {
+		return this.definitionTextProperty;
+	}
+	
+	public StringProperty termTextProperty() {
+		return this.termTextProperty;
+	}
 
 	public ObservableList<Notecard> getNotecards() {
-		return notecards;
+		return this.notecards;
 	}
 
 	public void setNotecards(ObservableList<Notecard> notecards) {

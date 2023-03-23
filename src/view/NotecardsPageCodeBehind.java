@@ -107,7 +107,11 @@ public class NotecardsPageCodeBehind {
 
 	@FXML
 	private void initialize() {
-
+		this.bindToViewModel();
+	}
+	
+	private void bindToViewModel() {
+		
 	}
 
 	/**

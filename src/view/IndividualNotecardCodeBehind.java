@@ -15,6 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model_classes.Notecard;
 import model_classes.Notecards;
+import viewmodel.NotecardsViewModel;
 
 public class IndividualNotecardCodeBehind {
 
@@ -22,6 +23,8 @@ public class IndividualNotecardCodeBehind {
 	private Scene scene;
 	private Parent root;
 
+	private NotecardsViewModel viewmodel;
+	
 	@FXML
 	private Button addToSetButton;
 
@@ -39,6 +42,20 @@ public class IndividualNotecardCodeBehind {
 
 	@FXML
 	private TextField termTextField;
+	
+	public IndividualNotecardCodeBehind() {
+		this.viewmodel = new NotecardsViewModel();
+	}
+	
+	@FXML
+	private void initialize() {
+		this.bindToViewModel();
+	}
+	
+	private void bindToViewModel() {
+		this.termTextField.textProperty().bindBidirectional(this.viewmodel.termTextProperty());
+		this.definitionTextArea.textProperty().bindBidirectional(this.viewmodel.definitionTextProperty());
+	}
 
 	@FXML
 	void addToSet() {
