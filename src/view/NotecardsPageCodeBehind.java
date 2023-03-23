@@ -16,6 +16,7 @@ import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
@@ -27,7 +28,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -37,6 +37,7 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import model_classes.Notecard;
 import model_classes.Notecards;
+import viewmodel.NotecardsViewModel;
 
 public class NotecardsPageCodeBehind {
 
@@ -95,11 +96,13 @@ public class NotecardsPageCodeBehind {
 	@FXML
 	private Button viewNotecardButton;
 
+	private NotecardsViewModel notecardsViewModel;
+
 	/**
 	 * Notecards Page Code Behind
 	 */
 	public NotecardsPageCodeBehind() {
-
+		this.notecardsViewModel = new NotecardsViewModel();
 	}
 
 	@FXML
@@ -210,7 +213,7 @@ public class NotecardsPageCodeBehind {
 				termLabel.setTextFill(Color.DARKSLATEGREY);
 				TextField termTextField = new TextField();
 
-				Label definitionLabel = new Label("Definition:");
+				Label definitionLabel = new Label("Definition:"); 
 				definitionLabel.setFont(font);
 				definitionLabel.setTextFill(Color.DARKSLATEGREY);
 				TextArea definitionTextArea = new TextArea();
@@ -453,23 +456,6 @@ public class NotecardsPageCodeBehind {
 	 */
 	@FXML
 	void searchNotecards(ActionEvent event) {
-		ObservableList<Notecard> notecards = notecardsTableView.getItems();
-		FilteredList<Notecard> filteredNotecards = new FilteredList<>(notecards, predicate -> true);
-		notecardsTableView.setItems(filteredNotecards);
-		try {
-			notecardsSearchBarTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-				String lowerCaseFilter = newValue.toLowerCase();
-				filteredNotecards.setPredicate(notecard -> {
-					if (newValue == null || newValue.isEmpty()) {
-						return true;
-					}
-					String term = notecard.getTerm().toLowerCase();
-					String definition = notecard.getDefinition().toLowerCase();
-					return term.contains(lowerCaseFilter) || definition.contains(lowerCaseFilter);
-				});
-			});
-		} catch (Exception exception) {
-			System.err.println(exception.getMessage());
-		}
+		this.notecardsViewModel.searchNotecards();
 	}
 }
