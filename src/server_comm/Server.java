@@ -15,7 +15,8 @@ public class Server extends Thread {
 	private BufferedReader standardInput;
 	private BufferedReader standardError;
 
-	public Server() {}
+	public Server() {
+	}
 
 	public Server(String path) {
 		if (path == null) {

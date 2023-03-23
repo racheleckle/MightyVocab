@@ -11,9 +11,9 @@ import javafx.stage.Stage;
 
 public class MightyVocabApplication extends Application {
 //vm arguments: --module-path "${eclipse_home}/javafx-sdk-18.0.2/lib" --add-modules javafx.controls,javafx.fxml
-	
+
 	private static final String SERVER_PATH = "../../../server/main.py";
-	
+
 	@Override
 	public void start(Stage primaryStage) {
 //		Server server = new Server();
@@ -23,7 +23,7 @@ public class MightyVocabApplication extends Application {
 //		client.start();
 //		
 //		System.out.println(ZMQ.CHARSET);
-		
+
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(getClass().getResource("../view/LoginPage.fxml"));

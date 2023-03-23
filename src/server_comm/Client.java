@@ -17,7 +17,8 @@ public class Client extends Thread {
 	private static Socket socket = context.socket(ZMQ.REQ);
 	private boolean responseReceived;
 
-	public Client() {}
+	public Client() {
+	}
 
 	public Client(String request, RequestType type) {
 		if (request == null) {
