@@ -63,7 +63,7 @@ public class Server extends Thread {
 
 //		try {
 //			Process process = Runtime.getRuntime().exec("py " + "\"" + this.path + "\"");
-//			//Client.connectToSocket();
+//			Client.connectToSocket();
 //			
 //			this.standardInput = new BufferedReader(new InputStreamReader(process.getInputStream()));
 //			this.standardError = new BufferedReader(new InputStreamReader(process.getErrorStream()));
