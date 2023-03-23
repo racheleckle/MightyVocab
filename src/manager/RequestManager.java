@@ -1,11 +1,11 @@
 package manager;
 
-import model_classes.RequestType;
 import model_classes.User;
-import server_comm.Client;
+//import model_classes.RequestType;
+//import server_comm.Client;
 
 public class RequestManager {
-	
+
 	public static User verifyPassword(String username, String password) {
 		return null;
 //		try {
@@ -27,5 +27,4 @@ public class RequestManager {
 //			return null;
 //		}
 	}
-
 }
