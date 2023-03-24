@@ -12,7 +12,7 @@ public class MightyVocabApplication extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("../view/IndividualNotecardPage.fxml"));
+			loader.setLocation(getClass().getResource("../view/LoginPage.fxml"));
 			Pane pane = loader.load();
 			Scene scene = new Scene(pane);
 			primaryStage.setScene(scene);

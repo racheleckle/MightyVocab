@@ -1,7 +1,10 @@
 package viewmodel;
 
+import javafx.beans.property.ListProperty;
+import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.scene.control.Button;
@@ -9,10 +12,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import model_classes.Notecard;
+import model_classes.Notecards;
 
 public class NotecardsViewModel {
 
-	private ObservableList<Notecard> notecards;
+	private ObservableList<Notecard> notecardsList;
 	private TableView<Notecard> notecardsTableView;
 	private TableColumn<Notecard, String> termTableColumn;
 	private TableColumn<Notecard, String> definitionTableColumn;
@@ -21,24 +25,35 @@ public class NotecardsViewModel {
 	private Button addButton;
 	private Button doneButton;
 	
+	private Notecards notecards;
+	
 	private StringProperty termTextProperty;
 	private StringProperty definitionTextProperty;
+	
+	private StringProperty searchTextProperty;
+	
+	private ListProperty<Notecard> notecardsProperty;
+	
+	
 
 	public NotecardsViewModel() {
 		
-		
 		this.termTextProperty = new SimpleStringProperty();
 		this.definitionTextProperty = new SimpleStringProperty();
+		this.notecardsProperty = new SimpleListProperty<Notecard>();
+		this.searchTextProperty = new SimpleStringProperty();
+		
+		this.notecards = new Notecards();
 		
 		
-		this.setNotecards(notecards);
+		this.setNotecards(notecardsList);
 		this.setNotecardsTableView(notecardsTableView);
 		this.setTermTableColumn(termTableColumn);
 		this.setDefinitionTableColumn(definitionTableColumn);
 		this.setCreateNotecardLabel(createNotecardLabel);
 		this.setNotecardsSearchTextField(notecardsSearchTextField);
-		this.setAddButton(addButton);
-		this.setDoneButton(doneButton);
+		//this.setAddButton(addButton);
+		//this.setDoneButton(doneButton);
 	}
 	
 	public StringProperty definitionTextProperty() {
@@ -48,13 +63,25 @@ public class NotecardsViewModel {
 	public StringProperty termTextProperty() {
 		return this.termTextProperty;
 	}
+	
+	public ListProperty<Notecard> notecardsProperty(){
+		return this.notecardsProperty;
+	}
 
-	public ObservableList<Notecard> getNotecards() {
-		return this.notecards;
+	public ObservableList<Notecard> getNotecardsList() {
+		return this.notecardsList;
+	}
+	
+	public StringProperty searchTextProperty() {
+		return this.searchTextProperty;
 	}
 
 	public void setNotecards(ObservableList<Notecard> notecards) {
-		this.notecards = notecards;
+		this.notecardsList = notecards;
+	}
+	
+	public Notecards getNotecards() {
+		return this.notecards;
 	}
 
 	public TableView<Notecard> getNotecardsTableView() {
@@ -130,6 +157,15 @@ public class NotecardsViewModel {
 	}
 
 	public void addNotecardToSet() {
+		String term = this.termTextProperty.getValue();
+		String definition = this.definitionTextProperty.getValue();
+		
+		if (!term.isEmpty() && !definition.isEmpty()) {
+			Notecard notecard = new Notecard(term, definition);
+			this.notecards.addNotecard(notecard);
+		}
+		
+		this.notecardsProperty.set(FXCollections.observableArrayList(this.notecards.getNotecards()));
 		
 	}
 

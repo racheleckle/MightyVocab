@@ -59,19 +59,24 @@ public class IndividualNotecardCodeBehind {
 
 	@FXML
 	void addToSet() {
-		String term = termTextField.getText();
-		String definition = this.definitionTextArea.getText();
-		if (!term.isEmpty() && !definition.isEmpty()) {
-			Notecard notecard = new Notecard(term, definition);
-			Notecards selectedSet = new Notecards();
-			selectedSet.addNotecard(notecard);
+		this.viewmodel.addNotecardToSet();
+		
+		
+//		String term = termTextField.getText();
+//		String definition = this.definitionTextArea.getText();
+//		if (!term.isEmpty() && !definition.isEmpty()) {
+//			Notecard notecard = new Notecard(term, definition);
+//			Notecards selectedSet = new Notecards();
+		
+//			selectedSet.addNotecard(notecard);
 //			saveSetToDatabase(selectedSet);
 //			try {
 //				cancel(null);
 //			} catch (IOException e) {
 //				e.printStackTrace();
 //			}
-		}
+		
+//		}
 	}
 
 	@FXML

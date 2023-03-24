@@ -111,7 +111,8 @@ public class NotecardsPageCodeBehind {
 	}
 	
 	private void bindToViewModel() {
-		
+		this.notecardsSearchBarTextField.textProperty().bindBidirectional(this.notecardsViewModel.searchTextProperty());
+		this.notecardsTableView.itemsProperty().bindBidirectional(this.notecardsViewModel.notecardsProperty());
 	}
 
 	/**
