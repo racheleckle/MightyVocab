@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ListIterator;
 import java.util.Optional;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -45,6 +47,8 @@ public class NotecardsPageCodeBehind {
 	private Scene scene;
 	private Parent root;
 
+	private ObjectProperty<Notecard> selectedNotecard;
+	
 	@FXML
 	private Button addToSetButton;
 
@@ -103,16 +107,20 @@ public class NotecardsPageCodeBehind {
 	 */
 	public NotecardsPageCodeBehind() {
 		this.notecardsViewModel = new NotecardsViewModel();
+		this.selectedNotecard = new SimpleObjectProperty<Notecard>();
 	}
 
 	@FXML
 	private void initialize() {
 		this.bindToViewModel();
+		
 	}
 	
 	private void bindToViewModel() {
 		this.notecardsSearchBarTextField.textProperty().bindBidirectional(this.notecardsViewModel.searchTextProperty());
 		this.notecardsTableView.itemsProperty().bindBidirectional(this.notecardsViewModel.notecardsProperty());
+		this.selectedNotecard.bindBidirectional(this.notecardsViewModel.selectedNotecard());
+		
 	}
 
 	/**
@@ -279,7 +287,7 @@ public class NotecardsPageCodeBehind {
 	private void viewNotecard(ActionEvent event) {
 		ObservableList<Notecard> notecards = notecardsTableView.getItems();
 
-		if (notecards.isEmpty()) {
+		if (notecards.isEmpty() || notecards == null) {
 			return;
 		}
 
@@ -404,15 +412,15 @@ public class NotecardsPageCodeBehind {
 	 */
 	@FXML
 	void deleteNotecard(ActionEvent event) {
-		Notecard selectedNotecard = notecardsTableView.getSelectionModel().getSelectedItem();
+		//Notecard selectedNotecard = notecardsTableView.getSelectionModel().getSelectedItem();
 		try {
 			Alert confirmationAlert = new Alert(AlertType.CONFIRMATION);
 			confirmationAlert.setTitle("Delete Notecard");
 			confirmationAlert.setContentText("Are you sure you want to delete this notecard?\n\nTerm: "
-					+ selectedNotecard.getTerm() + "\n\nDefinition:\n" + selectedNotecard.getDefinition());
+					+ this.selectedNotecard.getValue().getTerm() + "\n\nDefinition:\n" + this.selectedNotecard.get().getDefinition());
 			Optional<ButtonType> result = confirmationAlert.showAndWait();
 			if (result.isPresent() && result.get() == ButtonType.OK) {
-				notecardsTableView.getItems().remove(selectedNotecard);
+				this.notecardsViewModel.deleteNotecard();
 			}
 		} catch (Exception exception) {
 			System.err.println(exception.getMessage());

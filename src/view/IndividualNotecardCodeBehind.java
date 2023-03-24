@@ -13,8 +13,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import model_classes.Notecard;
-import model_classes.Notecards;
 import viewmodel.NotecardsViewModel;
 
 public class IndividualNotecardCodeBehind {
