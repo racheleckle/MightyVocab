@@ -15,20 +15,20 @@ public class Server extends Thread {
 	private BufferedReader standardInput;
 	private BufferedReader standardError;
 
-	public Server() {
-	}
+//	public Server() {
+//	}
 
-	public Server(String path) {
-		if (path == null) {
-			throw new IllegalArgumentException("Path cannot be null");
-		}
-
-		if (path.isEmpty()) {
-			throw new IllegalArgumentException("Path cannot be empty");
-		}
-
-		this.path = path;
-	}
+//	public Server(String path) {
+//		if (path == null) {
+//			throw new IllegalArgumentException("Path cannot be null");
+//		}
+//
+//		if (path.isEmpty()) {
+//			throw new IllegalArgumentException("Path cannot be empty");
+//		}
+//
+//		this.path = path;
+//	}
 
 	@Override
 	public void run() {
