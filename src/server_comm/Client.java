@@ -73,7 +73,7 @@ public class Client extends Thread {
 		if (!server.isAlive()) {
 			return;
 		}
-		disconnectFromSocket();
+		//disconnectFromSocket();
 	}
 
 	/**
@@ -84,19 +84,19 @@ public class Client extends Thread {
 	 * 
 	 * @throws JSONException
 	 */
-	public static void disconnectFromSocket() {
-		JSONObject request = new JSONObject();
-		try {
-			request.put("request", "exit");
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		System.out.println("Client - Sending exit");
-		socket.send(request.toString().getBytes(ZMQ.CHARSET), 0);
-
-		socket.close();
-		context.term();
-	}
+//	public static void disconnectFromSocket() {
+//		JSONObject request = new JSONObject();
+//		try {
+//			request.put("request", "exit");
+//		} catch (JSONException e) {
+//			e.printStackTrace();
+//		}
+//		System.out.println("Client - Sending exit");
+//		socket.send(request.toString().getBytes(ZMQ.CHARSET), 0);
+//
+//		socket.close();
+//		context.term();
+//	}
 
 	/**
 	 * Connects to server socket

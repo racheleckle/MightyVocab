@@ -5,9 +5,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-//import server_comm.Client;
-//import server_comm.Server;
-//import org.zeromq.ZMQ;
+import server_comm.Client;
+import server_comm.Server;
+import org.zeromq.ZMQ;
 
 public class MightyVocabApplication extends Application {
 //vm arguments: --module-path "${eclipse_home}/javafx-sdk-18.0.2/lib" --add-modules javafx.controls,javafx.fxml
@@ -16,13 +16,7 @@ public class MightyVocabApplication extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
-//		Server server = new Server();
-//		Client client = new Client();
-//		
-//		server.start();
-//		client.start();
-//		
-//		System.out.println(ZMQ.CHARSET);
+		
 
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -35,6 +29,14 @@ public class MightyVocabApplication extends Application {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
+		
+		Server server = new Server();
+		Client client = new Client();
+		
+		server.start();
+		client.start();
+		
+		System.out.println(ZMQ.CHARSET);
 	}
 
 	/**

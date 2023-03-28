@@ -46,17 +46,22 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/ZeroMQ Java Samples/lib/jeromq-0.3.4.jar">
+	<classpathentry kind="lib" path="C:/Users/mlee16/Desktop/MightyVocab/jeromq-0.5.3.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/jaxz2/Downloads/gson-gson-parent-2.10.1.zip">
+	<classpathentry kind="lib" path="C:/Users/mlee16/Desktop/MightyVocab/jnacl-1.0.0.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="java-json.jar">
+	<classpathentry kind="lib" path="C:/Users/mlee16/Desktop/MightyVocab/json-20230227.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/mlee16/Desktop/MightyVocab/gson-2.2.2.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
