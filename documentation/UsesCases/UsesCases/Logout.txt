@@ -1,0 +1,14 @@
+Logout
+Context - user is on any of the system pages
+
+Primary Flow
+1 - user clicks on menu dropdown
+2 - user selects logout option
+3 - system asks if they are sure they wish to logout
+4 - user selects yes
+5 - system logs out user
+
+Alternative Flow(s)
+USER DOES NOT WANT TO LOGOUT
+a4 - user selects no
+a5 - system cancels logout operation

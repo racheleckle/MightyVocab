@@ -1,0 +1,7 @@
+Search for Specific Notecard
+Context - user logged in and on the notecard page and notecards already within view
+
+Primary Flow
+1 - user clicks search button
+2 - user enters term or definition to search for
+3 - appropriate match shows up if available

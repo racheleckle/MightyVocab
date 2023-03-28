@@ -1,0 +1,11 @@
+View user statistics (accuracy)
+Context - user is logged in on studying page and selects submit button
+
+Primary Flow
+1 - system displays accuracy rate to user as "correct [#number]/incorrect[#number] cards"
+2 - user clicks button to leave back to studying page
+
+Alternative Flow(s)
+a2 - user clicks on missed term within listview of missed terms
+a3 - user is given option to determine if they feel like they actually got it correct
+a4 - user clicks button to leave back to studying page

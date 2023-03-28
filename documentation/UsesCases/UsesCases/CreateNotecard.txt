@@ -1,0 +1,22 @@
+Create Notecard
+Context - user is logged in and on the notecard page
+
+Primary Flow
+1 - user selects create notecard button
+2 - user clicks add notecard button
+3 - user enters notecard term and definition
+4 - user clicks confirm
+5 - user clicks done
+
+Alternative Flow(s)
+USER WANTS TO ADD ANOTHER
+a5 - user clicks add notecard button
+a6 - user enters notecard term and definition
+a7 - user clicks confirm
+a8 - user clicks done
+
+USER WANTS TO CANCEL CREATION OF NOTECARD
+a3 - user clicks cancel button
+
+USER WANTS TO STOP CREATING NOTECARDS
+a2 - user clicks done button

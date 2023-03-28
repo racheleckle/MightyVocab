@@ -1,0 +1,7 @@
+View Notecard
+Context - user is logged in and on the notecard page and notecards already within view
+
+Primary Flow
+1 - user clicks view notecard button
+2 - user has option to go to previous and next notecard within the view
+3 - user clicks close button to stop viewing notecards
