@@ -1,5 +1,7 @@
 package mainapp;
 
+import org.zeromq.ZMQ;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -7,8 +9,6 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import server_comm.Client;
 import server_comm.Server;
-import org.zeromq.ZMQ;
-import org.zeromq.ZMQ.Context;
 
 public class MightyVocabApplication extends Application {
 //vm arguments: --module-path "${eclipse_home}/javafx-sdk-18.0.2/lib" --add-modules javafx.controls,javafx.fxml

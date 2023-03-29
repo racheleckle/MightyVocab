@@ -1,11 +1,5 @@
 package model_classes;
 
-//import org.json.JSONException;
-import org.json.JSONObject;
-
-import manager.RequestManager;
-import manager.UserManager;
-
 /**
  * User Class
  * 
