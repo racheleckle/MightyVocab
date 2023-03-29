@@ -2,7 +2,6 @@ package viewmodel;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleListProperty;
@@ -12,6 +11,7 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import model_classes.Notecard;
 import model_classes.Notecards;
+
 /**
  * View Model class for Sets
  * 
@@ -64,10 +64,15 @@ public class SetsViewModel {
 		}
 		
 		this.setsListProperty.set(FXCollections.observableArrayList(this.sets));
+		this.resetProperties();
 	}
 	
 	public void editNotecards() {
 		
+	}
+	
+	private void resetProperties() {
+		this.setsNameProperty.set("");
 	}
 
 }
