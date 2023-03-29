@@ -29,14 +29,11 @@ public class MightyVocabApplication extends Application {
 			ex.printStackTrace();
 		}
 		
-		//Server server = new Server();
-		//Client client = new Client();
+		Server server = new Server();
+		Client client = new Client();
 		
-		//server.start();
-		//client.start();
-		
-
-		Context context = ZMQ.context(1);
+		server.start();
+		client.start();
 		
 		System.out.println(ZMQ.CHARSET);
 	}
