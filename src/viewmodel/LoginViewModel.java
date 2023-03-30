@@ -1,6 +1,6 @@
 package viewmodel;
 
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,70 +11,58 @@ import javafx.beans.property.StringProperty;
 import model_classes.User;
 
 public class LoginViewModel {
-	private List<User> users;
-	private StringProperty usernameProperty;
-	private StringProperty passwordProperty;
-	private StringProperty labelProperty;
+	private final List<User> users;
+	private final StringProperty usernameProperty;
+	private final StringProperty passwordProperty;
+	private final StringProperty labelProperty;
 
 	public LoginViewModel() {
-		this.users = new ArrayList<User>();
-		this.usernameProperty = new SimpleStringProperty();
-		this.passwordProperty = new SimpleStringProperty();
-		this.labelProperty = new SimpleStringProperty();
-		this.loadUsers();
-	}
-
-	public StringProperty usernameProperty() {
-		return this.usernameProperty;
-	}
-
-	public StringProperty passwordProperty() {
-		return this.passwordProperty;
-	}
-
-	public StringProperty labelProperty() {
-		return this.labelProperty;
+		users = new ArrayList<>();
+		usernameProperty = new SimpleStringProperty();
+		passwordProperty = new SimpleStringProperty();
+		labelProperty = new SimpleStringProperty();
+		loadUsers();
 	}
 
 	public boolean checkUserExists() {
-		if (users != null) {
-			for (User currentUser : users) {
-				if (currentUser.verifyCredentials(usernameProperty.get(), passwordProperty.get())) {
-					return true;
-				}
+		for (User user : users) {
+			if (user.verifyCredentials(usernameProperty.get(), passwordProperty.get())) {
+				return true;
 			}
 		}
-		this.labelProperty.set("User does not exist, please create an account.");
+		labelProperty.set("User does not exist, please create an account.");
 		return false;
 	}
 
-	public void loadUsers() {
+	public void createUserAccount() {
+		addUser();
+		FileWriter writer = new FileWriter();
+//		writer.saveUsersToFile(users);
+	}
+
+	public StringProperty usernameProperty() {
+		return usernameProperty;
+	}
+
+	public StringProperty passwordProperty() {
+		return passwordProperty;
+	}
+
+	public StringProperty labelProperty() {
+		return labelProperty;
+	}
+
+	private void loadUsers() {
 		try {
 			FileReader reader = new FileReader();
-			this.users = reader.loadUsersFromFile();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-
-	}
-
-	public void createUserAccount() {
-		this.addUser();
-
-		FileWriter writer = new FileWriter();
-		try {
-			writer.write(users);
-		} catch (FileNotFoundException e) {
+			users.addAll(reader.loadUsersFromFile());
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void addUser() {
-		String username = this.usernameProperty.get();
-		String password = this.passwordProperty.get();
-
-		User user = new User(username, password);
-		users.add(user);
+	private void addUser() {
+		User newUser = new User(usernameProperty.get(), passwordProperty.get());
+		users.add(newUser);
 	}
-
 }

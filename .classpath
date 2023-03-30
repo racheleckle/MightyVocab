@@ -1,71 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="var" path="ECLIPSE_HOME/javafx-sdk-18.0.2/lib/javafx.base.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="var" path="ECLIPSE_HOME/javafx-sdk-18.0.2/lib/javafx.controls.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="var" path="ECLIPSE_HOME/javafx-sdk-18.0.2/lib/javafx.fxml.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="var" path="ECLIPSE_HOME/javafx-sdk-18.0.2/lib/javafx.graphics.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="var" path="ECLIPSE_HOME/javafx-sdk-18.0.2/lib/javafx.media.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="var" path="ECLIPSE_HOME/javafx-sdk-18.0.2/lib/javafx.swing.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="var" path="ECLIPSE_HOME/javafx-sdk-18.0.2/lib/javafx.web.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="var" path="ECLIPSE_HOME/javafx-sdk-18.0.2/lib/javafx-swt.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/mlee16/Desktop/MightyVocab/jnacl-1.0.0.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/mlee16/Desktop/MightyVocab/json-20230227.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/mlee16/Desktop/MightyVocab/gson-2.2.2.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/mlee16/Desktop/MightyVocab/jeromq-0.3.4.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
+	<classpathentry kind="lib" path="lib/javafx-sdk-18.0.1/lib/javafx.base.jar"/>
+	<classpathentry kind="lib" path="lib/javafx-sdk-18.0.1/lib/javafx.controls.jar"/>
+	<classpathentry kind="lib" path="lib/javafx-sdk-18.0.1/lib/javafx.fxml.jar"/>
+	<classpathentry kind="lib" path="lib/javafx-sdk-18.0.1/lib/javafx.graphics.jar"/>
+	<classpathentry kind="lib" path="lib/javafx-sdk-18.0.1/lib/javafx.media.jar"/>
+	<classpathentry kind="lib" path="lib/javafx-sdk-18.0.1/lib/javafx.swing.jar"/>
+	<classpathentry kind="lib" path="lib/javafx-sdk-18.0.1/lib/javafx.web.jar"/>
+	<classpathentry kind="lib" path="lib/javafx-sdk-18.0.1/lib/javafx-swt.jar"/>
+	<classpathentry kind="lib" path="lib/gson-2.2.2.jar"/>
+	<classpathentry kind="lib" path="lib/java-json.jar"/>
+	<classpathentry kind="lib" path="lib/jeromq-0.3.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -85,6 +85,3 @@ class _User:
         else:
             type_name = obj.__class__.__name__
             raise TypeError(f"Object of type '{type_name}' is not JSON Serializable")
-
-    
-        
