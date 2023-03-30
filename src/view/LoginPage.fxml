@@ -47,7 +47,7 @@
                   <Font name="Cambria" size="18.0" />
                </font>
             </PasswordField>
-            <Button fx:id="loginButton" layoutX="437.0" layoutY="452.0" mnemonicParsing="false" onAction="#checkForUser" text="Log in">
+            <Button fx:id="loginButton" layoutX="437.0" layoutY="452.0" mnemonicParsing="false" onAction="#userLogin" text="Log in">
                <font>
                   <Font name="Cambria" size="18.0" />
                </font>

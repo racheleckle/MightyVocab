@@ -28,13 +28,16 @@ public class CreateAccountPageCodeBehind {
 	private Button createAccountButton;
 
 	@FXML
-	private Label invalidCredentialsLabel;
+	private Label errorMessageLabel;
 
 	@FXML
 	private Hyperlink loginpageHyperlink;
 
 	@FXML
 	private PasswordField passwordPasswordField;
+
+	@FXML
+	private PasswordField verifyPasswordField;
 
 	@FXML
 	private TextField usernameTextField;
@@ -45,18 +48,21 @@ public class CreateAccountPageCodeBehind {
 
 	@FXML
 	private void initialize() {
-
 		this.bindToLoginViewModel();
+		this.bindButtons();
+		this.setupListeners();
 	}
 
 	private void bindToLoginViewModel() {
 		this.usernameTextField.textProperty().bindBidirectional(this.viewModel.usernameProperty());
 		this.passwordPasswordField.textProperty().bindBidirectional(this.viewModel.passwordProperty());
-		this.invalidCredentialsLabel.textProperty().bindBidirectional(this.viewModel.labelProperty());
+		this.errorMessageLabel.textProperty().bindBidirectional(this.viewModel.labelProperty());
+
+		this.verifyPasswordField.textProperty().bindBidirectional(this.viewModel.verifyPasswordProperty());
 	}
 
 	@FXML
-	void addUserToText(ActionEvent event) {
+	void userCreateAccount(ActionEvent event) {
 		this.viewModel.createUserAccount();
 		try {
 			root = FXMLLoader.load(getClass().getResource("NotecardsPage.fxml"));
@@ -65,24 +71,37 @@ public class CreateAccountPageCodeBehind {
 			stage.setScene(scene);
 			stage.show();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
 	@FXML
-	void userCreateAccount(ActionEvent event) {
-
-	}
-
-	@FXML
 	void goToLoginPage(ActionEvent event) throws IOException {
-
 		root = FXMLLoader.load(getClass().getResource("LoginPage.fxml"));
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();
+	}
+
+	private void setupListeners() {
+		this.verifyPasswordField.textProperty().addListener((observable, oldValue, newValue) -> {
+			if (newValue != null) {
+				if (this.viewModel.verifyPassword()) {
+					this.errorMessageLabel.textProperty().set("");
+				}else if(newValue.isEmpty()) {
+					this.errorMessageLabel.textProperty().set("");
+				} else {
+					this.errorMessageLabel.textProperty().set("Passwords do not match");
+				}
+			}
+		});
+	}
+
+	private void bindButtons() {
+		this.createAccountButton.disableProperty()
+				.bind(this.usernameTextField.textProperty().isEmpty().or(this.passwordPasswordField.textProperty()
+						.isEmpty().or(this.verifyPasswordField.textProperty().isEmpty().or(this.errorMessageLabel.textProperty().isNotEmpty()))));
 	}
 
 }
