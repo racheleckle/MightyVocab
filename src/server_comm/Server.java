@@ -15,20 +15,23 @@ public class Server extends Thread {
 	private BufferedReader standardInput;
 	private BufferedReader standardError;
 
-//	public Server() {
-//	}
+	/**
+	 * Default Server
+	 */
+	public Server() {
+	}
 
-//	public Server(String path) {
-//		if (path == null) {
-//			throw new IllegalArgumentException("Path cannot be null");
-//		}
-//
-//		if (path.isEmpty()) {
-//			throw new IllegalArgumentException("Path cannot be empty");
-//		}
-//
-//		this.path = path;
-//	}
+	public Server(String path) {
+		if (path == null) {
+			throw new IllegalArgumentException("Path cannot be null");
+		}
+
+		if (path.isEmpty()) {
+			throw new IllegalArgumentException("Path cannot be empty");
+		}
+
+		this.path = path;
+	}
 
 	@Override
 	public void run() {
@@ -62,33 +65,33 @@ public class Server extends Thread {
 		socket.close();
 		context.term();
 
-		try {
-			ProcessBuilder builder = new ProcessBuilder("py", this.path);
-			Process process = builder.start();
-			Client.connectToSocket();
-
-			this.standardInput = new BufferedReader(new InputStreamReader(process.getInputStream()));
-			this.standardError = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-
-			String response = this.standardInput.readLine();
-			// read output from the command
-			System.out.println("----Server Responses-----");
-			while (!this.exit) {
-				System.out.println(response);
-				response = this.standardInput.readLine();
-				if (response == null) {
-					break;
-				}
-			}
-
-			// read any errors from the command that was attempted
-			System.out.println("---Server Error----");
-			while ((response = this.standardError.readLine()) != null && !this.exit) {
-				System.err.println(response);
-			}
-		} catch (Exception exc) {
-			exc.printStackTrace();
-		}
+//		try {
+//			ProcessBuilder builder = new ProcessBuilder("py", this.path);
+//			Process process = builder.start();
+//			Client.connectToSocket();
+//
+//			this.standardInput = new BufferedReader(new InputStreamReader(process.getInputStream()));
+//			this.standardError = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+//
+//			String response = this.standardInput.readLine();
+//			// read output from the command
+//			System.out.println("----Server Responses-----");
+//			while (!this.exit) {
+//				System.out.println(response);
+//				response = this.standardInput.readLine();
+//				if (response == null) {
+//					break;
+//				}
+//			}
+//
+//			// read any errors from the command that was attempted
+//			System.out.println("---Server Error----");
+//			while ((response = this.standardError.readLine()) != null && !this.exit) {
+//				System.err.println(response);
+//			}
+//		} catch (Exception exc) {
+//			exc.printStackTrace();
+//		}
 	}
 
 	private void delay() {
