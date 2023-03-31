@@ -43,6 +43,10 @@ public class LoginViewModel {
 		return this.verifyPasswordProperty;
 	}
 
+	/**
+	 * Checks if the user exists
+	 * @return
+	 */
 	public boolean checkUserExists() {
 		if (users != null) {
 			for (User currentUser : users) {
@@ -64,7 +68,6 @@ public class LoginViewModel {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	/**
@@ -108,11 +111,9 @@ public class LoginViewModel {
 		String password = this.passwordProperty.get();
 
 		User user = new User(username, password);
-		if (!this.users.contains(user)) {
+		if (!this.checkUserExists()) {
 			users.add(user);
-		} else {
-			this.labelProperty.set("User does not exist, please create an account.");
-		}
+		} 
 	}
 
 }

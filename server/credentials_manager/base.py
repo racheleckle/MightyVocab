@@ -1,7 +1,7 @@
 import typing
 
 '''
-Manages set of credentials for all system users
+Manages the set of credentials for all system users
 '''
 
 class Manager:
@@ -23,17 +23,6 @@ class Manager:
     @return
     '''
     def addUser(self, username: str, password: str) -> bool:
-        raise NotImplementedError()
-
-    '''
-    Retrieves a list of names for all users
-
-    @precondition none
-    @postcondition none
-
-    @return list of names for users
-    '''
-    def getUsers(self) -> typing.List[str]:
         raise NotImplementedError()
 
     '''
@@ -63,5 +52,14 @@ class Manager:
     def updateUserPassword(self, username: str, password: str) -> bool:
         raise NotImplementedError()
 
-    
+    '''
+    Retrieves a list of names for all users
+
+    @precondition none
+    @postcondition none
+
+    @return list of names for users
+    '''
+    def getUsers(self) -> typing.List[str]:
+        raise NotImplementedError()
     

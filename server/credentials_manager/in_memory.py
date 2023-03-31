@@ -3,7 +3,7 @@ import typing
 import json
 import jsonschema
 from jsonschema import validate
-import credential_manager.base import Manager
+''' import manager'''
 
 '''
 Stores a single set of credentials
@@ -13,7 +13,7 @@ Stores a single set of credentials
 '''
 
 class _UserAccount:
-    ACCOUNT_PROPERTY = "__account__"
+    USER_PROPERTY = "__account__"
     USERNAME = "username"
     PASSWORD = "password"
 
@@ -86,25 +86,5 @@ class _User:
             type_name = obj.__class__.__name__
             raise TypeError(f"Object of type '{type_name}' is not JSON Serializable")
 
-    def decode_user(dct):
-        isValid = _UserAccount.validateJson(dct[_User.USER_ACCOUNT])
-        if (isValid):
-            return _User(dct[_User.USERNAME], dct[_User.PASSWORD])
-        return dct
-
-'''
-Manages the set of user credentials for all users in the system
-'''
-
-class LocalManager (Manager):
-    '''
-    Creates a new credential manager with default user credentials saves to given file
-    '''
-    def __init__(self, file: str = "data.json"):
-        self._systemCredentials: dict[str, _User] = {}
-        self.dataFile = file
-        self.loadData()
-
-    def saveDate(self):
-        file = open(self.dataFile, 'w')
-        json.dump()####
+    
+        

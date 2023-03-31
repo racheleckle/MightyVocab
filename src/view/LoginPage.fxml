@@ -22,11 +22,6 @@
                   <Font name="Cambria" size="24.0" />
                </font>
             </Label>
-            <Label fx:id="invalidCredentialsLabel" layoutX="280.0" layoutY="264.0" text="Incorrect username or password. Please try again." textFill="#c00000" visible="false">
-               <font>
-                  <Font name="Cambria" size="18.0" />
-               </font>
-            </Label>
             <Label layoutX="281.6" layoutY="330.0" text="Username" textFill="DARKSLATEGRAY">
                <font>
                   <Font name="Cambria" size="18.0" />
@@ -57,6 +52,11 @@
                   <Font name="Cambria" size="18.0" />
                </font>
             </Hyperlink>
+            <Label fx:id="invalidCredentialsLabel" alignment="CENTER" disable="true" layoutX="280.0" layoutY="264.0" text="Incorrect username or password." textAlignment="CENTER" textFill="#bf1a00" underline="true" visible="false">
+               <font>
+                  <Font name="Cambria" size="18.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>
