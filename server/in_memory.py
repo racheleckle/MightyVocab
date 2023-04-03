@@ -6,11 +6,11 @@ from jsonschema import validate
 
 
 class UserAccount:
-    USER_PROPERTY = "__account__"
+    USER_PROPERTY = "account"
     USERNAME = "username"
     PASSWORD = "password"
 
-    userSchema = {
+    user_schema = {
         "type": "object",
         "properties": {
             "__account__": {"type": "boolean"},
@@ -28,101 +28,94 @@ class UserAccount:
             }
         }
     }
-
+    
     @staticmethod
-    def validateJSON(jsonData):
+    def validate_json(json_data):
         try:
-            validate(instance=jsonData, schema=_UserAccount.userSchema)
+            validate(instance=json_data, schema=UserAccount.user_schema)
         except jsonschema.exceptions.ValidationError as err:
             return False
         return True
 
 
 class _LocalAuthManager(AuthManager):
-    def __init__(self, file: str="data.json"):
-        self.systemCredentials: dict[str, User] = {}
-        self.dataFile = file
+
+    def init(self, file: str="data.json"):
+        # self.system_credentials: dict[str, User] = {}
+        self.data_file = file
         self.load_data()
-
+    
     def load_data(self):
-        if not os.path.exists(self.dataFile):
+        if not os.path.exists(self.data_file):
             return
-        with open(self.dataFile) as user_data:
+        with open(self.data_file) as user_data:
             data = user_data.read()
-            self._systemCredentials = json.loads(data, object_hook=_User.decode_user) 
+            self.system_credentials = json.loads(data, object_hook=User.decode_user)
             user_data.close()
-
+    
     def save_data(self):
-        file = open(self.dataFile, 'w')
-        json.dump(self._systemCredentials, file, default=_User.encode_user, indent=4, sort_keys=True)
-        file.close()
+        with open(self.data_file, 'w') as file:
+            json.dump(self.system_credentials, file, default=User.encode_user, indent=4, sort_keys=True)
         
-    def verifyUser(self, username: str, password: str) -> bool:
-        if username in self._auth and self._auth[username].getPassword() == password:
+    def verify_user(self, username: str, password: str) -> bool:
+        if username in self.system_credentials and self.system_credentials[username].get_password() == password:
             return True
         return False
-
-    def addUser(self, username: str, password: str, account:dict) -> bool:
-        if (username in self.systemAuth):
+    
+    def add_user(self, username: str, password: str, account: dict) -> bool:
+        if username in self.system_credentials:
             return False
-        isValid = UserAccount.validateJSON(profile)
-        if (isValid):
+        is_valid = UserAccount.validate_json(account)
+        if is_valid:
             credentials = User(username, password, account)
-            self._systemCredentials[username] = credentials
+            self.system_credentials[username] = credentials
             self.save_data()
             return True
         return False
-
-    def updateUserInfo(self, username: str) -> bool:
-        if username in self._auth:
+    
+    def update_user_info(self, username: str) -> bool:
+        if username in self.system_credentials:
             self.save_data()
             return True
         return False
-
-    def removeUser(self, username: str) -> bool:
-        if username not in self._selfAuth:
+    
+    def remove_user(self, username: str) -> bool:
+        if username not in self.system_credentials:
             return False
-        self._selfAuth.pop(username)
+        self.system_credentials.pop(username)
         self.save_data()
         return True
-
-    # def getUser(self, username: str) -> typing.Optional["_User"]:
-    #      if username not in self._selfAuth:
-    #          raise Exception("System with this username unfound")
-    #      return self._selfAuth[username].getPassword()
-
-    def updateUserPassword(self, username: str, password: str) -> bool:
-        if username not in self._systemAuth:
+    
+    def update_user_password(self, username: str, password: str) -> bool:
+        if username not in self.system_credentials:
             return False
-        self._selfAuth[username].setProfile(profile)
+        self.system_credentials[username].set_password(password)
         self.save_data()
         return True
-
-    def get_user(self, username: str) -> str:
-        user = self._systemAuth.get(username)
-        if user:
-            return json.dumps(user, default=_User.encode_user)
-        return None
-
+    
+    def get_user(self, username: str) -> typing.Optional[User]:
+        if username not in self.system_credentials:
+            raise Exception("System with this username unfound")
+        return self.system_credentials[username]
+    
     def login(self, username: str, password: str) -> bool:
-        if self.verifyUser(username, password):
-            setattr(self, _UserAccount.USER_PROPERTY, username)
+        if self.verify_user(username, password):
+            setattr(self, UserAccount.USER_PROPERTY, username)
             return True
         return False
-
+    
     def logout(self):
-        setattr(self, _UserAccount.USER_PROPERTY, None)
-
-    def createNotecard(self, term: str, definition: str) -> bool:
-        current_user = getattr(self, _UserAccount.USER_PROPERTY, None)
+        setattr(self, UserAccount.USER_PROPERTY, None)
+    
+    def create_notecard(self, term: str, definition: str) -> bool:
+        current_user = getattr(self, UserAccount.USER_PROPERTY, None)
         if current_user:
-            user = self.getUser(current_user)
+            user = self.get_user(current_user)
             if user:
                 user.add_notecard(term, definition)
                 self.save_data()
                 return True
-        return False
-
+    
     def editNotecard(self, term: str, definition: str) -> bool:
         current_user = getattr(self, _UserAccount.USER_PROPERTY, None)
         if current_user:
@@ -132,7 +125,6 @@ class _LocalAuthManager(AuthManager):
                     self.save_data()
                     return True
                 return False
-
 
     def deleteNotecard(self, term: str) -> bool:
         current_user = getattr(self, _UserAccount.USER_PROPERTY, None)
@@ -144,18 +136,23 @@ class _LocalAuthManager(AuthManager):
                     return True
                 return False
 
+
 class User:
 
-    def init(self, username: str, password: str):
+    def __init__(self, username: str, password: str, account: dict):
         self._username = username
         self._password = password
+        self._account = account
         self._notecards = []
-    
+
     def getUsername(self) -> str:
         return self._username
     
     def getPassword(self) -> str:
         return self._password
+    
+    def getAccount(self) -> dict:
+        return self._account
     
     def add_notecard(self, term: str, definition: str):
         self._notecards.append({"term": term, "definition": definition})
@@ -199,58 +196,58 @@ class User:
 
 
 class StudyNotecard:
-
-    def init(self):
+    
+    def __init__(self):
         self.auth_manager = _LocalAuthManager()
-        
+
     def create_account(self, username: str, password: str) -> bool:
         return self.auth_manager.addUser(username, password)
-    
+
     def login(self, username: str, password: str) -> bool:
         return self.auth_manager.login(username, password)
-    
+
     def logout(self):
         self.auth_manager.logout()
-    
+
     def create_notecard(self, term: str, definition: str) -> bool:
         return self.auth_manager.createNotecard(term, definition)
-    
+
     def edit_notecard(self, term: str, definition: str) -> bool:
         return self.auth_manager.editNotecard(term, definition)
-    
+
     def delete_notecard(self, term: str) -> bool:
         return self.auth_manager.deleteNotecard(term)
-    
+
     def get_notecards(self) -> typing.List[typing.Dict[str, str]]:
-        current_user = getattr(self.auth_manager, _UserAccount.USER_PROPERTY, None)
-        if current_user:
-            user = self.auth_manager.getUser(current_user)
-            if user:
-                return user._notecards
+        user = self.auth_manager.getUser(getattr(self.auth_manager, _UserAccount.USER_PROPERTY, None))
+        if user:
+            return user._notecards
         return []
-    
+
     def get_users(self) -> typing.List[str]:
         return self.auth_manager.getUsers()
+
     
 class _TestUserAccount(unittest.TestCase):
+
     def test_user_schema(self):
         valid_user = {"__account__": True, "username": "johndoe", "password": "password123", "_notecards": []}
         invalid_user = {"__account__": "not_bool", "username": 123, "password": None, "_notecards": {}}
 
         self.assertTrue(_UserAccount.validateJSON(valid_user))
         self.assertFalse(_UserAccount.validateJSON(invalid_user))
-        
+
     def test_create_user_account(self):
         user_account = UserAccount('johndoe', 'password123')
         self.assertEqual(user_account.username, 'johndoe')
         self.assertEqual(user_account.password, 'password123')
-    
+
     def test_login(self):
         user_account = UserAccount('johndoe', 'password123')
         self.assertTrue(user_account.login('johndoe', 'password123'))
         self.assertFalse(user_account.login('johndoe', 'password456'))
         self.assertFalse(user_account.login('janedoe', 'password123'))
-    
+
     def test_change_password(self):
         user_account = UserAccount('johndoe', 'password123')
         self.assertTrue(user_account.change_password('password456'))
@@ -258,25 +255,27 @@ class _TestUserAccount(unittest.TestCase):
         self.assertFalse(user_account.change_password('password123'))
         self.assertEqual(user_account.password, 'password456')
 
+        
 class _TestUser(unittest.TestCase):
+
+    def setUp(self):
+        self.user_account = UserAccount('johndoe', 'password123')
+        self.user = User('John', 'Doe', 'johndoe@example.com', self.user_account)
+        
     def test_create_user(self):
-        user_account = UserAccount('johndoe', 'password123')
-        user = User('John', 'Doe', 'johndoe@example.com', user_account)
-        self.assertEqual(user.first_name, 'John')
-        self.assertEqual(user.last_name, 'Doe')
-        self.assertEqual(user.email, 'johndoe@example.com')
-        self.assertEqual(user.user_account.username, 'johndoe')
-        self.assertEqual(user.user_account.password, 'password123')
+        self.assertEqual(self.user.first_name, 'John')
+        self.assertEqual(self.user.last_name, 'Doe')
+        self.assertEqual(self.user.email, 'johndoe@example.com')
+        self.assertEqual(self.user.user_account.username, 'johndoe')
+        self.assertEqual(self.user.user_account.password, 'password123')
     
     def test_update_profile(self):
-        user_account = UserAccount('johndoe', 'password123')
-        user = User('John', 'Doe', 'johndoe@example.com', user_account)
-        self.assertTrue(user.update_profile('John', 'Doe', 'johndoe@example.com', 'newpassword123'))
-        self.assertEqual(user.first_name, 'John')
-        self.assertEqual(user.last_name, 'Doe')
-        self.assertEqual(user.email, 'johndoe@example.com')
-        self.assertEqual(user.user_account.username, 'johndoe')
-        self.assertEqual(user.user_account.password, 'newpassword123')
+        self.assertTrue(self.user.update_profile('John', 'Doe', 'johndoe@example.com', 'newpassword123'))
+        self.assertEqual(self.user.first_name, 'John')
+        self.assertEqual(self.user.last_name, 'Doe')
+        self.assertEqual(self.user.email, 'johndoe@example.com')
+        self.assertEqual(self.user.user_account.username, 'johndoe')
+        self.assertEqual(self.user.user_account.password, 'newpassword123')
            
     def test_add_notecard(self):
         user = _User("johndoe", "password123")
@@ -302,8 +301,10 @@ class _TestUser(unittest.TestCase):
         self.assertTrue(user.delete_notecard("test term"))
         self.assertFalse(user.delete_notecard("nonexistent term"))
         self.assertEqual(len(user._notecards), 0)
+
     
 class _TestLocalAuthManager(unittest.TestCase):
+
     def setUp(self):
         self.mock_file = MagicMock()
         self.mock_file.__enter__.return_value = self.mock_file
@@ -334,41 +335,39 @@ class _TestLocalAuthManager(unittest.TestCase):
 
         self.assertTrue(auth_manager.verifyUser("johndoe", "password123"))
         self.assertFalse(auth_manager.verifyUser("johndoe", ""))
-    
+
+        
 class _TestRequestHandler(unittest.TestCase):
+
+    def setUp(self):
+        self.user1_account = UserAccount('johndoe', 'password123')
+        self.user1 = User('John', 'Doe', self.user1_account)
+        self.user2_account = UserAccount('janedoe', 'password456')
+        self.user2 = User('Jane', 'Doe', self.user2_account)
+        self.request_manager = RequestManager()
+
     def test_create_request(self):
-        user_account = UserAccount('johndoe', 'password123')
-        user = User('John', 'Doe', 'johndoe@example.com', user_account)
-        request_handler = RequestHandler()
-        request_id = request_manager.create_request(user, 'I need help with my computer')
-        self.assertEqual(len(request_manager.requests), 1)
-        self.assertEqual(request_manager.requests[0].id, request_id)
-        self.assertEqual(request_manager.requests[0].user, user)
-        self.assertEqual(request_manager.requests[0].description, 'I need help with my computer')
-    
+        request_id = self.request_manager.create_request(self.user1, 'I need help with my computer')
+        self.assertEqual(len(self.request_manager.requests), 1)
+        self.assertEqual(self.request_manager.requests[0].id, request_id)
+        self.assertEqual(self.request_manager.requests[0].user, self.user1)
+        self.assertEqual(self.request_manager.requests[0].description, 'I need help with my computer')
+
     def test_get_requests(self):
-        user_account1 = UserAccount('johndoe', 'password123')
-        user1 = User('John', 'Doe', 'johndoe@example.com', user_account1)
-        user_account2 = UserAccount('janedoe', 'password456')
-        user2 = User('Jane', 'Doe', 'janedoe@example.com', user_account2)
-        request_manager = RequestManager()
-        request_manager.create_request(user1, 'I need help with my computer')
-        request_manager.create_request(user2, 'I need help with my phone')
-        requests = request_manager.get_requests()
+        self.request_manager.create_request(self.user1, 'I need help with my computer')
+        self.request_manager.create_request(self.user2, 'I need help with my phone')
+        requests = self.request_manager.get_requests()
         self.assertEqual(len(requests), 2)
-        self.assertEqual(requests[0].user, user1)
-        self.assertEqual(requests[1].user, user2)
+        self.assertEqual(requests[0].user, self.user1)
+        self.assertEqual(requests[1].user, self.user2)
         self.assertEqual(requests[0].description, 'I need help with my computer')
         self.assertEqual(requests[1].description, 'I need help with my phone')
-        
+
     def test_update_request_status(self):
-        user_account = UserAccount('johndoe', 'password123')
-        user = User('John', 'Doe', 'johndoe@example.com', user_account)
-        request_manager = RequestManager()
-        request_id = request_manager.create_request(user, 'I need help with my computer')
-        self.assertTrue(request_manager.update_request_status(request_id, 'In progress'))
-        self.assertEqual(request_manager.requests[0].status, 'In progress')
-        self.assertFalse(request_manager.update_request_status(2, 'In progress'))
-        self.assertEqual(request_manager.requests[0].status, 'In progress')
-        self.assertTrue(request_manager.update_request_status(request_id, 'Completed'))
-        self.assertEqual(request_manager.requests[0].status, 'Completed')
+        request_id = self.request_manager.create_request(self.user1, 'I need help with my computer')
+        self.assertTrue(self.request_manager.update_request_status(request_id, 'In progress'))
+        self.assertEqual(self.request_manager.requests[0].status, 'In progress')
+        self.assertFalse(self.request_manager.update_request_status(2, 'In progress'))
+        self.assertEqual(self.request_manager.requests[0].status, 'In progress')
+        self.assertTrue(self.request_manager.update_request_status(request_id, 'Completed'))
+        self.assertEqual(self.request_manager.requests[0].status, 'Completed')

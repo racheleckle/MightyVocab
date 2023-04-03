@@ -1,94 +1,109 @@
-import typing
-
-'''
-Manages the set of credentials for all system users
-'''
+from typing import List
 
 
 class AuthManager:
 
-    '''
-    Creates a new Manager
-    '''
-
     def __init__(self):
-        raise NotImplementedError()
+        pass
     
-    def verifyUser(self, username: str, password: str) -> bool:
+    def verify_user(self, username: str, password: str) -> bool:
+        """
+        Verifies whether the user with the given username and password exists in the system.
+
+        :param username: The username of the user to verify.
+        :param password: The password of the user to verify.
+        :return: True if the user exists and the password is correct, False otherwise.
+        """
         raise NotImplementedError()
         
-    '''
-    Add a new user with the specified credentials to the system
+    def add_user(self, username: str, password: str) -> bool:
+        """
+        Adds a new user with the given username and password to the system.
 
-    @precondition  username != null && password != null
-    @postcondition
-
-    @param username
-    @param password
-
-    @return
-    '''
-
-    def addUser(self, username: str, password: str) -> bool:
+        :param username: The username of the new user.
+        :param password: The password of the new user.
+        :return: True if the user was successfully added, False otherwise.
+        """
         raise NotImplementedError()
 
-    def updateUserInfo(self, username: str) -> bool:
+    def update_user_info(self, username: str) -> bool:
+        """
+        Updates the information for the user with the given username in the system.
+
+        :param username: The username of the user to update.
+        :return: True if the user information was successfully updated, False otherwise.
+        """
         raise NotImplementedError()
 
-    '''
-    Removes a user with specified
+    def remove_user(self, username: str) -> bool:
+        """
+        Removes the user with the given username from the system.
 
-    @precondition  username != null
-    @postcondition
-
-    @param username
-    
-    @return
-    '''
-
-    def removeUser(self, username: str) -> bool:
+        :param username: The username of the user to remove.
+        :return: True if the user was successfully removed, False otherwise.
+        """
         raise NotImplementedError()
     
-    def getUser(self) -> bool:
+    def get_user(self) -> bool:
+        """
+        Gets the currently logged in user.
+
+        :return: True if there is a logged in user, False otherwise.
+        """
         raise NotImplementedError()
     
-        '''
-    Update an existing user with the specified credentials to the sytem
+    def update_user_password(self, username: str, password: str) -> bool:
+        """
+        Updates the password for the user with the given username in the system.
 
-    @precondition  username != null && password != null
-    @postcondition
-
-    @param username
-    @param password
-
-    @return
-    '''
-
-    def updateUserPassword(self, username: str, password: str) -> bool:
+        :param username: The username of the user to update the password for.
+        :param password: The new password for the user.
+        :return: True if the password was successfully updated, False otherwise.
+        """
         raise NotImplementedError()
 
-    '''
-    Retrieves a list of names for all users
+    def get_users(self) -> List[str]:
+        """
+        Retrieves a list of usernames for all users in the system.
 
-    @precondition none
-    @postcondition none
-
-    @return list of names for users
-    '''
-
-    def getUsers(self) -> typing.List[str]:
+        :return: A list of usernames for all users in the system.
+        """
         raise NotImplementedError()
     
     def login(self) -> bool:
+        """
+        Logs the user in to the system.
+
+        :return: True if the login was successful, False otherwise.
+        """
         raise NotImplementedError()
     
     def logout(self) -> bool:
+        """
+        Logs the user out of the system.
+
+        :return: True if the logout was successful, False otherwise.
+        """
         raise NotImplementedError()
     
-    def createNotecard(self, term: str, definition: str) -> bool:
+    def create_notecard(self, term: str, definition: str) -> bool:
+        """
+        Creates a new notecard with the given term and definition.
+
+        :param term: The term for the notecard.
+        :param definition: The definition for the notecard.
+        :return: True if the notecard was successfully created, False otherwise.
+        """
         raise NotImplementedError()
     
-    def editNotecard(self, term: str, definition: str) -> bool:
+    def edit_notecard(self, term: str, definition: str) -> bool:
+        """
+        Edits the notecard with the given term to have the given definition.
+
+        :param term: The term of the notecard to edit.
+        :param definition: The new definition for the notecard.
+        :return: True if the notecard was successfully edited, False otherwise.
+        """
         raise NotImplementedError()
     
     def deleteNotecard(self, term: str, definition: str) -> bool:
@@ -96,4 +111,3 @@ class AuthManager:
     
     def getNotecards(self) -> bool:
         raise NotImplementedError()
-    

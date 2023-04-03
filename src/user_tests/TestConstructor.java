@@ -40,7 +40,7 @@ class TestConstructor {
 	@Test
 	void testValidConstructor() {
 		User user = new User("Mr Clean", "$!detergent12!$");
-		assertEquals("Mr Clean", user.GetUsername(), "username is valid");
-		assertEquals("$!detergent12!$", user.GetPassword(), "password is valid");
+		assertEquals("Mr Clean", user.getUsername(), "username is valid");
+		assertEquals("$!detergent12!$", user.getPassword(), "password is valid");
 	}
 }

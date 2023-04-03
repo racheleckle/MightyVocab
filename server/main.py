@@ -1,6 +1,6 @@
 import os
-
 from server import Server
+
 
 class main:
 
