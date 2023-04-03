@@ -14,7 +14,7 @@ import server_comm.Server;
 
 public class MightyVocabApplication extends Application {
 
-	private static final String SERVER_PATH = "../../../server/main.py";
+	private static final String SERVER_PATH = "../server/main.py";
 	private static final String LOGIN_PAGE_FXML_PATH = "../view/LoginPage.fxml";
 
 	@Override
@@ -29,7 +29,7 @@ public class MightyVocabApplication extends Application {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-//		Server server = new Server(SERVER_PATH);
+//		Server server = new Server(SERVER_PATH)
 //		Client client = new Client(null, null);
 //		server.start();
 //		client.start();

@@ -23,7 +23,7 @@ public class LoginViewModel {
 		usernameProperty = new SimpleStringProperty();
 		passwordProperty = new SimpleStringProperty();
 		labelProperty = new SimpleStringProperty();
-		login = new UserLogin();
+		login = new UserLogin(this.usernameProperty.get(), this.passwordProperty.get());
 		loadUsers();
 	}
 
