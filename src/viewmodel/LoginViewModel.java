@@ -3,15 +3,17 @@ package viewmodel;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import fileIO_classes.FileReader;
-import fileIO_classes.FileWriter;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import model_classes.User;
+import server_comm.UserLogin;
 
 public class LoginViewModel {
 	private final List<User> users;
+	private final UserLogin login;
 	private final StringProperty usernameProperty;
 	private final StringProperty passwordProperty;
 	private final StringProperty labelProperty;
@@ -21,23 +23,18 @@ public class LoginViewModel {
 		usernameProperty = new SimpleStringProperty();
 		passwordProperty = new SimpleStringProperty();
 		labelProperty = new SimpleStringProperty();
+		login = new UserLogin();
 		loadUsers();
 	}
 
 	public boolean checkUserExists() {
-		for (User user : users) {
-			if (user.verifyCredentials(usernameProperty.get(), passwordProperty.get())) {
-				return true;
-			}
+		Optional<User> user = users.stream()
+				.filter(u -> u.verifyCredentials(usernameProperty.get(), passwordProperty.get())).findFirst();
+		if (user.isPresent()) {
+			return true;
 		}
 		labelProperty.set("User does not exist, please create an account.");
 		return false;
-	}
-
-	public void createUserAccount() {
-		addUser();
-		FileWriter writer = new FileWriter();
-//		writer.saveUsersToFile(users);
 	}
 
 	public StringProperty usernameProperty() {
@@ -52,6 +49,18 @@ public class LoginViewModel {
 		return labelProperty;
 	}
 
+	public User confirmLogin() {
+		String username = this.usernameProperty.getValue();
+		String password = this.passwordProperty.getValue();
+		if (username.equals("") || password.equals("")) {
+			return null;
+		}
+		login.setUsername(username);
+		login.setPassword(password);
+		User user = login.verifyCredentials();
+		return user;
+	}
+
 	private void loadUsers() {
 		try {
 			FileReader reader = new FileReader();
@@ -61,8 +70,10 @@ public class LoginViewModel {
 		}
 	}
 
-	private void addUser() {
-		User newUser = new User(usernameProperty.get(), passwordProperty.get());
-		users.add(newUser);
-	}
+//	private void addUser() {
+//		User newUser = new User(usernameProperty.get(), passwordProperty.get());
+//		users.add(newUser);
+//		FileWriter writer = new FileWriter();
+//		writer.saveUsersToFile(users);
+//	}
 }

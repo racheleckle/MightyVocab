@@ -14,47 +14,47 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import manager.UserNotecardManager;
+import model_classes.User;
 import viewmodel.LoginViewModel;
 
 public class LoginPageCodeBehind {
 
 	private LoginViewModel viewModel;
+	private UserNotecardManager userNotecardManager;
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
 
 	@FXML
 	private Hyperlink createaccountHyperlink;
-
 	@FXML
 	private Label invalidCredentialsLabel;
-
 	@FXML
 	private Button loginButton;
-
 	@FXML
 	private PasswordField passwordPasswordField;
-
 	@FXML
 	private TextField usernameTextField;
 
 	public LoginPageCodeBehind() {
-		this.viewModel = new LoginViewModel();
+		viewModel = new LoginViewModel();
 	}
 
 	@FXML
 	private void initialize() {
-		this.bindToLoginViewModel();
-		this.invalidCredentialsLabel.visibleProperty().set(true);
+		bindToLoginViewModel();
+		invalidCredentialsLabel.setVisible(true);
+		userNotecardManager = UserNotecardManager.getInstance();
 	}
 
 	private void bindToLoginViewModel() {
-		this.usernameTextField.textProperty().bindBidirectional(this.viewModel.usernameProperty());
-		this.passwordPasswordField.textProperty().bindBidirectional(this.viewModel.passwordProperty());
-		this.invalidCredentialsLabel.textProperty().bindBidirectional(this.viewModel.labelProperty());
-
+		usernameTextField.textProperty().bindBidirectional(viewModel.usernameProperty());
+		passwordPasswordField.textProperty().bindBidirectional(viewModel.passwordProperty());
+		invalidCredentialsLabel.textProperty().bindBidirectional(viewModel.labelProperty());
 	}
 
+	@FXML
 	void userLogin(ActionEvent event) throws IOException {
 		root = FXMLLoader.load(getClass().getResource("NotecardsPage.fxml"));
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -65,12 +65,17 @@ public class LoginPageCodeBehind {
 
 	@FXML
 	void checkForUser(ActionEvent event) throws IOException {
-		if (this.viewModel.checkUserExists()) {
+		if (viewModel.checkUserExists()) {
 			root = FXMLLoader.load(getClass().getResource("NotecardsPage.fxml"));
 			stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			scene = new Scene(root);
 			stage.setScene(scene);
 			stage.show();
+		}
+		User user = viewModel.confirmLogin();
+		if (user != null) {
+			userNotecardManager.setUser(user);
+			goToCreateAccountPage(event);
 		}
 	}
 

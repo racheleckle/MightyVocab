@@ -1,5 +1,8 @@
 package server_comm;
 
+import manager.NotecardManager;
+import model_classes.User;
+
 public class UserLogin {
 
 	private String username;
@@ -34,6 +37,15 @@ public class UserLogin {
 
 	public String getPassword() {
 		return password;
+	}
+
+	public User verifyCredentials() {
+		try {
+			return NotecardManager.verifyPassword(this.username, this.password);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	public void setPassword(String password) {

@@ -99,7 +99,7 @@ public class NotecardsPageCodeBehind {
 	 * Notecards Page Code Behind
 	 */
 	public NotecardsPageCodeBehind() {
-
+		
 	}
 
 	@FXML

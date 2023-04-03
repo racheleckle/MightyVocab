@@ -6,57 +6,32 @@ import java.util.List;
 import model_classes.User;
 
 public class UserManager {
-	private static UserManager single_instance = null;
-	
-	private List<User> users;
-	
-	public UserManager() {
-		this.users = new ArrayList<User>();
+
+	private static final UserManager INSTANCE = new UserManager();
+	private List<User> users = new ArrayList<>();
+
+	private UserManager() {
 	}
-	
+
 	public static UserManager getInstance() {
-		if (single_instance == null) {
-			single_instance = new UserManager();
-		}
-		return single_instance;
+		return INSTANCE;
 	}
-	
-	public List<User> getUsers(){
-		if (this.users.isEmpty()) {
-			//this.users = RequestManager.getUsers(); getting users from client
+
+	public List<User> getUsers() {
+		if (users.isEmpty()) {
+			// users = RequestManager.getUsers(); // getting users from client
 		}
-		return this.users;
+		return new ArrayList<>(users);
 	}
-	
-	/**
-	 * Adds a user
-	 * 
-	 * @precondition none
-	 * @postcondition none
-	 * 
-	 * @param username
-	 * @param password
-	 * @return
-	 */
+
 	public boolean addUser(String username, String password) {
-		if (username == null) {
-			throw new IllegalArgumentException("username cannot be null");
+		if (username == null || username.isEmpty()) {
+			throw new IllegalArgumentException("username cannot be null or empty");
 		}
-		if (username.isEmpty()) {
-			throw new IllegalArgumentException("username cannot be empty");
+		if (password == null || password.isEmpty()) {
+			throw new IllegalArgumentException("password cannot be null or empty");
 		}
-		if (password == null) {
-			throw new IllegalArgumentException("password cannot be null");
-		}
-		if (password.isEmpty()) {
-			throw new IllegalArgumentException("password cannot be null");
-		}
-		
 		User newUser = new User(username, password);
-		
-		return this.users.add(newUser);
-		
+		return users.add(newUser);
 	}
-	
-	
 }

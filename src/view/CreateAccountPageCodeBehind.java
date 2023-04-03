@@ -45,7 +45,6 @@ public class CreateAccountPageCodeBehind {
 
 	@FXML
 	private void initialize() {
-
 		this.bindToLoginViewModel();
 	}
 
@@ -55,20 +54,20 @@ public class CreateAccountPageCodeBehind {
 		this.invalidCredentialsLabel.textProperty().bindBidirectional(this.viewModel.labelProperty());
 	}
 
-	@FXML
-	void addUserToText(ActionEvent event) {
-		this.viewModel.createUserAccount();
-		try {
-			root = FXMLLoader.load(getClass().getResource("NotecardsPage.fxml"));
-			stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-			scene = new Scene(root);
-			stage.setScene(scene);
-			stage.show();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+//	@FXML
+//	void addUserToText(ActionEvent event) {
+//		this.viewModel.createUserAccount();
+//		try {
+//			root = FXMLLoader.load(getClass().getResource("NotecardsPage.fxml"));
+//			stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//			scene = new Scene(root);
+//			stage.setScene(scene);
+//			stage.show();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
 
 	@FXML
 	void userCreateAccount(ActionEvent event) {
@@ -77,12 +76,10 @@ public class CreateAccountPageCodeBehind {
 
 	@FXML
 	void goToLoginPage(ActionEvent event) throws IOException {
-
 		root = FXMLLoader.load(getClass().getResource("LoginPage.fxml"));
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();
 	}
-
 }
