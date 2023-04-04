@@ -1,0 +1,15 @@
+Study Notecards
+Context - user is logged in and on select a set page
+
+Primary Flow
+1 - user selects a set
+2 - user clicks study button
+3 - notecards are loaded into a "queue" to cycle through
+4 - user clicks submit button after going through all notecards
+5 - accuracy rate is given to user
+
+Alternative Flow(s)
+USER SKIPS CARD
+a3-4 - user clicks skip button to skip over current card
+a5 - user clicks submit button after going through all notecards
+a6 - accuracy rate is given to user

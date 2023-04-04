@@ -1,0 +1,15 @@
+Add To Set
+Context - user is logged in and on notecards page and notecards already in view
+
+Primary Flow
+1. user selects notecard within view
+2. user clicks add to set button
+3. system prompts user which set they wish to add the notecard to
+4. user selects set from list of existing sets
+4. system prompts if user is sure they want to add that notecard to specified set
+5. user clicks yes
+6. system adds notecard to specified set
+
+Alternative Flow(s)
+USER NO LONGER WISHES TO ADD A NOTECARD TO A SET
+a3 - user selects cancel

@@ -1,0 +1,13 @@
+Login
+Context - user is not logged in and is trying to
+
+Primary Flow
+1 - user inputs credentials
+2 - system successfully validates credentials
+3 - system gives user access to system
+
+Alternative Flow(s)
+BAD LOGIN
+a2 - system fails to validate credentials
+a3 - system informs user of failure and prompts to reenter credentials
+return to step 1

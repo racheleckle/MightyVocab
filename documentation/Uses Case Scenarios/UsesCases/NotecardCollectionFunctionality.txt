@@ -1,0 +1,30 @@
+Create Notecard Set
+Context - user is logged in and on select a set page
+
+Primary Flow
+1. user clicks add set button
+2. system directs user to manage sets page
+3. user clicks add notecard button
+4. system directs user to page that allows creation of notecard within set
+5. user enters term and definition for notecard
+6. user clicks add button
+7. system adds notecard to set
+
+Alternative Flow(s)
+CANCEL CREATION OF NOTECARD FOR A SET
+a5. user clicks cancel button
+a6. system directs user back to manage sets page
+
+---------------------------------------------------------------
+
+Edit Notecards within a Set
+Context - user is logged in and on select a set page
+
+Primary Flow
+1. user clicks edit cards button
+2. system direct suser to manage sets page
+3. user is allowed to edit notecards within specified set
+
+Alternative Flow(s)
+USER WISHES TO GO BACK
+a3. user clicks previous button to go back to select a set page

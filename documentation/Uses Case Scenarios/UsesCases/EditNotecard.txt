@@ -1,0 +1,14 @@
+Edit notecard
+Context - user is logged in and on the notecard page and notecards already within view
+
+Primary Flow
+1 - user selects notecard within view
+2 - user clicks edit notecard button
+3 - user enters specified information
+4 - user clicks confirm
+5 - system edits notecard
+
+Alternative Flow(s)
+USER WISHES TO CANCEL EDITING
+a3 - user clicks cancel
+a4 - system closes out edit notecard screen

@@ -1,0 +1,13 @@
+Create Account
+Context - user is currently not logged in
+
+Primary Flow
+1. User enters information they wish to create an account with
+2. User clicks create account button
+3. Account is created
+4. System logs them into system
+
+Alternative Flow(s)
+USER ALREADY HAS ACCOUNT
+a1 - user selects option "I alreayd have an account."
+a2 - system redirects to login page

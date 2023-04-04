@@ -1,0 +1,12 @@
+Delete notecard
+Context - user is logged in and on the notecard page with notecards already in view
+
+Primary Flow
+1 - user selects notecard within view
+2 - user clicks delete notecard button
+3 - user selects ok to delete notecard
+4 - system deletes notecard
+
+Alternative Flow(s)
+USER WANTS TO CANCEL DELETION
+a3 - user clicks cancel button
