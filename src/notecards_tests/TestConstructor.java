@@ -1,6 +1,7 @@
 package notecards_tests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.List;
 
@@ -12,10 +13,16 @@ import model_classes.Notecards;
 class TestConstructor {
 
 	@Test
-	void testNotecardsConstructor() {
+	void testDefaultNotecardsConstructor() {
 		Notecards notecards = new Notecards();
-		//ObservableList<Notecard> notecardList = FXCollections.observableArrayList();
 		List<Notecard> notecardList2 = notecards.getNotecards();
 		assertEquals(notecardList2, notecards.getNotecards(), "test constructor");
+	}
+	
+	@Test
+	void testNullNameContructor() {
+		assertThrows(IllegalArgumentException.class, () -> {
+			// Finish adding test cases
+		});
 	}
 }

@@ -1,7 +1,6 @@
 package server_comm;
 
 import java.io.BufferedReader;
-import java.io.InputStreamReader;
 
 import org.json.JSONException;
 import org.zeromq.ZMQ;
