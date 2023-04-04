@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ListIterator;
 import java.util.Optional;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -43,6 +45,8 @@ public class NotecardsPageCodeBehind {
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
+
+	private final ObjectProperty<Notecard> selectedProperty;
 
 	@FXML
 	private Button addToSetButton;
@@ -100,6 +104,7 @@ public class NotecardsPageCodeBehind {
 	 */
 	public NotecardsPageCodeBehind() {
 
+		this.selectedProperty = new SimpleObjectProperty<Notecard>();
 	}
 
 	@FXML
@@ -127,8 +132,13 @@ public class NotecardsPageCodeBehind {
 	 * @param event
 	 */
 	@FXML
-	void goToSetsPage(ActionEvent event) {
+	void goToSetsPage(ActionEvent event) throws IOException {
 
+		root = FXMLLoader.load(getClass().getResource("SetsPage.fxml"));
+		stage = (Stage) this.menuMenuButton.getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
 	}
 
 	/**
@@ -147,8 +157,13 @@ public class NotecardsPageCodeBehind {
 	 * @param event
 	 */
 	@FXML
-	void goToStudyPage(ActionEvent event) {
+	void goToStudyPage(ActionEvent event) throws IOException {
 
+		root = FXMLLoader.load(getClass().getResource("Study.fxml"));
+		stage = (Stage) this.menuMenuButton.getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
 	}
 
 	/**
@@ -157,8 +172,13 @@ public class NotecardsPageCodeBehind {
 	 * @param event
 	 */
 	@FXML
-	void goToUserStatisticsPage(ActionEvent event) {
+	void goToUserStatisticsPage(ActionEvent event) throws IOException {
 
+		root = FXMLLoader.load(getClass().getResource("UserStatisticsPage.fxml"));
+		stage = (Stage) this.menuMenuButton.getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
 	}
 
 	/**

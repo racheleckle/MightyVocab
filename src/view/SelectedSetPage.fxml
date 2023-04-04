@@ -11,11 +11,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="314.0" prefWidth="306.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.NotecardsPageCodeBehind">
+<AnchorPane prefHeight="314.0" prefWidth="306.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.SelectedSetPageCodeBehind">
    <children>
       <AnchorPane prefHeight="720.0" prefWidth="960.0" style="-fx-background-color: oldlace;">
          <children>
-            <Label layoutX="338.2" layoutY="28.0" text="My Notecards" textFill="DARKSLATEGRAY">
+            <Label layoutX="384.8" layoutY="28.0" text="{set title}" textFill="DARKSLATEGRAY">
                <font>
                   <Font name="Cambria" size="48.0" />
                </font>
@@ -49,12 +49,12 @@
                   <Font name="Cambria" size="18.0" />
                </font>
             </Button>
-            <Button fx:id="deleteNotecardButton" layoutX="623.0" layoutY="150.0" mnemonicParsing="false" onAction="#deleteNotecard" prefHeight="60.0" prefWidth="120.0" style="-fx-border-color: slategrey;" text="Delete&#10;Notecard" textAlignment="CENTER" textFill="DARKSLATEGRAY">
+            <Button fx:id="deleteNotecardButton" layoutX="623.0" layoutY="150.0" mnemonicParsing="false" onAction="#deleteNotecard" prefHeight="60.0" prefWidth="120.0" style="-fx-border-color: slategrey;" text="Remove&#10;Notecard" textAlignment="CENTER" textFill="DARKSLATEGRAY">
                <font>
                   <Font name="Cambria" size="18.0" />
                </font>
             </Button>
-            <Button fx:id="addToSetButton" layoutX="826.0" layoutY="150.0" mnemonicParsing="false" onAction="#addNotecardToSet" prefHeight="60.0" prefWidth="120.0" style="-fx-border-color: slategrey;" text="Add&#10;to Set" textAlignment="CENTER" textFill="DARKSLATEGRAY">
+            <Button fx:id="addToSetButton" layoutX="826.0" layoutY="150.0" mnemonicParsing="false" onAction="#addNotecardToSet" prefHeight="60.0" prefWidth="120.0" style="-fx-border-color: slategrey;" text="Add to&#10;Another Set" textAlignment="CENTER" textFill="DARKSLATEGRAY">
                <font>
                   <Font name="Cambria" size="18.0" />
                </font>
@@ -71,8 +71,8 @@
             </Button>
             <TableView fx:id="notecardsTableView" layoutX="14.0" layoutY="292.0" prefHeight="413.0" prefWidth="932.0" style="-fx-border-color: slategrey;">
               <columns>
-                <TableColumn fx:id="termTableColumn" editable="false" prefWidth="125" sortType="DESCENDING" text="Term" />
-                <TableColumn fx:id="definitionTableColumn" editable="false" prefWidth="325.0" sortType="DESCENDING" text="Definition" />
+                <TableColumn fx:id="termTableColumn" editable="false" prefWidth="75.0" sortType="DESCENDING" text="Term" />
+                <TableColumn fx:id="definitionTableColumn" editable="false" prefWidth="75.0" sortType="DESCENDING" text="Definition" />
               </columns>
             </TableView>
          </children>
