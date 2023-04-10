@@ -16,11 +16,14 @@ public class LoginViewModel {
 	private StringProperty passwordProperty;
 	private StringProperty labelProperty;
 
+	private StringProperty verifyPasswordProperty;
+
 	public LoginViewModel() {
 		this.users = new ArrayList<User>();
 		this.usernameProperty = new SimpleStringProperty();
 		this.passwordProperty = new SimpleStringProperty();
 		this.labelProperty = new SimpleStringProperty();
+		this.verifyPasswordProperty = new SimpleStringProperty();
 		this.loadUsers();
 	}
 
@@ -36,6 +39,14 @@ public class LoginViewModel {
 		return this.labelProperty;
 	}
 
+	public StringProperty verifyPasswordProperty() {
+		return this.verifyPasswordProperty;
+	}
+
+	/**
+	 * Checks if the user exists
+	 * @return
+	 */
 	public boolean checkUserExists() {
 		if (users != null) {
 			for (User currentUser : users) {
@@ -44,10 +55,12 @@ public class LoginViewModel {
 				}
 			}
 		}
-		this.labelProperty.set("User does not exist, please create an account.");
 		return false;
 	}
 
+	/**
+	 * Loads user
+	 */
 	public void loadUsers() {
 		try {
 			FileReader reader = new FileReader();
@@ -55,9 +68,11 @@ public class LoginViewModel {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-
 	}
 
+	/**
+	 * Creates a user account
+	 */
 	public void createUserAccount() {
 		this.addUser();
 
@@ -69,12 +84,36 @@ public class LoginViewModel {
 		}
 	}
 
+	/**
+	 * Verifies the password
+	 * 
+	 * @return
+	 */
+	public boolean verifyPassword() {
+		String password = this.passwordProperty.get();
+		String verify = this.verifyPasswordProperty.get();
+
+		if (password.equals(verify)) {
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Adds a user
+	 * 
+	 * @precondition none
+	 * @postcondition none
+	 */
 	public void addUser() {
 		String username = this.usernameProperty.get();
 		String password = this.passwordProperty.get();
 
 		User user = new User(username, password);
-		users.add(user);
+		if (!this.checkUserExists()) {
+			users.add(user);
+		} 
 	}
 
 }

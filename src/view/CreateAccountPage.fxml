@@ -22,12 +22,12 @@
                   <Font name="Cambria" size="24.0" />
                </font>
             </Label>
-            <Label fx:id="invalidCredentialsLabel" layoutX="377.0" layoutY="264.0" text="Username already exists." textFill="#c00000" visible="false">
+            <Label layoutX="283.0" layoutY="331.0" text="Username" textFill="DARKSLATEGRAY">
                <font>
                   <Font name="Cambria" size="18.0" />
                </font>
             </Label>
-            <Label layoutX="281.6" layoutY="330.0" text="Username" textFill="DARKSLATEGRAY">
+            <Label fx:id="errorMessageLabel" layoutX="114.0" layoutY="637.0" prefHeight="36.0" prefWidth="733.0" textAlignment="CENTER" textFill="#c00000">
                <font>
                   <Font name="Cambria" size="18.0" />
                </font>
@@ -47,11 +47,21 @@
                   <Font name="Cambria" size="18.0" />
                </font>
             </PasswordField>
-            <Button fx:id="createAccountButton" layoutX="403.0" layoutY="452.0" mnemonicParsing="false" onAction="#addUserToText" text="Create Account">
+            <Button fx:id="createAccountButton" layoutX="396.0" layoutY="501.0" mnemonicParsing="false" onAction="#userCreateAccount" text="Create Account">
                <font>
                   <Font name="Cambria" size="18.0" />
                </font>
             </Button>
+            <Label layoutX="234.0" layoutY="457.0" text="Verify Password" textFill="DARKSLATEGRAY">
+               <font>
+                  <Font name="Cambria" size="18.0" />
+               </font>
+            </Label>
+            <PasswordField fx:id="verifyPasswordField" layoutX="380.0" layoutY="450.0" prefHeight="34.0" prefWidth="278.0" style="-fx-border-color: slategrey;">
+               <font>
+                  <Font name="Cambria" size="18.0" />
+               </font>
+            </PasswordField>
             <Hyperlink fx:id="loginpageHyperlink" layoutX="368.0" layoutY="565.0" onAction="#goToLoginPage" text="I already have an account.">
                <font>
                   <Font name="Cambria" size="18.0" />

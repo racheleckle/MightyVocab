@@ -45,7 +45,6 @@ public class LoginPageCodeBehind {
 	@FXML
 	private void initialize() {
 		this.bindToLoginViewModel();
-		this.invalidCredentialsLabel.visibleProperty().set(true);
 	}
 
 	private void bindToLoginViewModel() {
@@ -55,23 +54,17 @@ public class LoginPageCodeBehind {
 
 	}
 
-	void userLogin(ActionEvent event) throws IOException {
-		root = FXMLLoader.load(getClass().getResource("NotecardsPage.fxml"));
-		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		scene = new Scene(root);
-		stage.setScene(scene);
-		stage.show();
-	}
-
 	@FXML
-	void checkForUser(ActionEvent event) throws IOException {
-
+	void userLogin(ActionEvent event) throws IOException {
 		if (this.viewModel.checkUserExists()) {
 			root = FXMLLoader.load(getClass().getResource("NotecardsPage.fxml"));
 			stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			scene = new Scene(root);
 			stage.setScene(scene);
 			stage.show();
+		} else {
+			this.invalidCredentialsLabel.setVisible(true);
+			this.invalidCredentialsLabel.textProperty().set("Invalid credentials, if you don't have an account please create one now.");
 		}
 	}
 
