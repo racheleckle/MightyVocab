@@ -5,12 +5,25 @@ import java.util.List;
 
 public class Notecards {
 	private List<Notecard> notecards;
+	private String name;
+	
+	public Notecards() {
+		this.notecards = new ArrayList<Notecard>();
+		this.name = "Default";
+	}
 
 	/**
 	 * Instantiates an instance of a collectible of notecard
 	 */
-	public Notecards() {
+	public Notecards(String name) {
+		if (name == null) {
+			throw new IllegalArgumentException("name cannot be null");
+		}
+		if (name.isEmpty()) {
+			throw new IllegalArgumentException("name cannot be empty");
+		}
 		this.notecards = new ArrayList<Notecard>();
+		this.name = name;
 	}
 
 	/**
@@ -24,6 +37,14 @@ public class Notecards {
 	
 	public void setNotecards(ArrayList<Notecard> notecards) {
 		this.notecards = notecards;
+	}
+	
+	public String getName() {
+		return this.name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	/**
@@ -95,5 +116,10 @@ public class Notecards {
 	 */
 	public Notecard getNotecardByIndex(int notecardIndex) {
 		return this.notecards.get(notecardIndex);
+	}
+	
+	@Override
+	public String toString() {
+		return this.name;
 	}
 }

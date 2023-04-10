@@ -2,7 +2,7 @@ package notecards_tests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
+import static org.junit.jupiter.api.Assertions.*;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -24,5 +24,25 @@ class TestConstructor {
 		assertThrows(IllegalArgumentException.class, () -> {
 			// Finish adding test cases
 		});
+	}
+	void testNullNameConstructor() {
+		assertThrows(IllegalArgumentException.class, () -> {
+			Notecards test = new Notecards(null);
+		});
+	}
+	
+	@Test
+	void testEmptyNameConstructor() {
+		assertThrows(IllegalArgumentException.class, () -> {
+			Notecards test = new Notecards("");
+		});
+	}
+  
+	@Test
+	void testValidNotecardsConstructor() {
+		Notecards notecards = new Notecards("Test Notecards");
+		List<Notecard> notecardList2 = notecards.getNotecards();
+		assertEquals(notecardList2, notecards.getNotecards(), "test constructor");
+		assertEquals("Test Notecards", notecards.getName());
 	}
 }
