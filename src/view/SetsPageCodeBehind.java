@@ -7,37 +7,29 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-import model_classes.Notecards;
-import viewmodel.SetsViewModel;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Group;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import model_classes.Notecards;
+import viewmodel.SetsViewModel;
 
 public class SetsPageCodeBehind {
 
@@ -140,14 +132,6 @@ public class SetsPageCodeBehind {
 		// Go to Study page; Not sure which study page; and have to send the name of the list and list itself
 		root = FXMLLoader.load(getClass().getResource("Studying.fxml"));
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-	public SetsPageCodeBehind() {
-
-	}
-
-	@FXML
-	private void initialize() {
-
 	}
 
 	@FXML

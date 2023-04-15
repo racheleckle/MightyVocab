@@ -2,6 +2,7 @@ package server_comm;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.zeromq.ZContext;
 import org.zeromq.ZMQ;
 import org.zeromq.ZMQ.Context;
 import org.zeromq.ZMQ.Socket;
@@ -10,7 +11,7 @@ import model_classes.RequestType;
 
 public class Client extends Thread {
 
-	private RequestType type;
+	private String type;
 	private String request;
 
 	private static Context context = ZMQ.context(1);
@@ -21,10 +22,10 @@ public class Client extends Thread {
 	 * Default constructor
 	 */
 	public Client() {
-		
+
 	}
 
-	public Client(String request, RequestType type) {
+	public Client(String request, String type) {
 		if (request == null) {
 			throw new IllegalArgumentException("Request cannot be null");
 		}
@@ -36,32 +37,59 @@ public class Client extends Thread {
 		this.type = type;
 	}
 
+	public void connectionsAndShit() {
+		try (ZContext context = new ZContext()) {
+			// Create a ZMQ socket
+			ZMQ.Socket socket = context.createSocket(ZMQ.REQ);
+			socket.connect("tcp://127.0.0.1:5555");
+			
+			// Create an object to send to the server
+			
+			
+			// Send the object to the server
+			socket.send("GET".getBytes(ZMQ.CHARSET));
+			
+			// Receive the response from the server
+			String response = socket.recvStr();
+			System.out.println("Received response: " + response);
+			
+			// Close the socket
+			socket.close();
+		}
+	}
+
 	/// From Sample Client only
 	public void run() {
-		Context context = ZMQ.context(1);
-
-		// Socket to talk to server
-		System.out.println("Connecting to server...");
-
-		Socket socket = context.socket(ZMQ.REQ);
-		socket.connect("tcp://127.0.0.1:5555");
-
-		for (int requestNbr = 0; requestNbr != 10; requestNbr++) {
-			String request = "Hello";
-			System.out.println("Client - Sending Hello " + requestNbr);
-			socket.send(request.getBytes(ZMQ.CHARSET), 0);
-
-			byte[] reply = socket.recv(0);
-			String response = new String(reply, ZMQ.CHARSET);
-			System.out.println("Client - Received " + response + " " + requestNbr);
-		}
-
-		String request = "exit";
-		System.out.println("Client - Sending Exit");
-		socket.send(request.getBytes(ZMQ.CHARSET), 0);
-
-		socket.close();
-		context.term();
+		this.connectionsAndShit();
+//		Context context = ZMQ.context(1);
+//
+//		// Socket to talk to server
+//		System.out.println("Connecting to server...");
+//
+//		Socket socket = context.socket(ZMQ.REQ);
+//		socket.connect("tcp://127.0.0.1:5555");
+//
+//		for (int requestNbr = 0; requestNbr != 10; requestNbr++) {
+//			String request = "Hello";
+//			System.out.println("Client - Sending Hello " + requestNbr);
+//			socket.send(request.getBytes(ZMQ.CHARSET), 0);
+//
+//			byte[] reply = socket.recv(0);
+//			String response = new String(reply, ZMQ.CHARSET);
+//
+//			if (response.equals("World")) {
+//				System.out.println("Theres a match");
+//			}
+//
+//			System.out.println("Client - Received " + response + " " + requestNbr);
+//		}
+//
+//		String request = "exit";
+//		System.out.println("Client - Sending Exit");
+//		socket.send(request.getBytes(ZMQ.CHARSET), 0);
+//
+//		socket.close();
+//		context.term();
 	}
 
 	/**
