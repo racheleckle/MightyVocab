@@ -45,10 +45,11 @@ public class Client extends Thread {
 			socket.connect("tcp://127.0.0.1:5555");
 			
 			// Create an object to send to the server
-			User user = new User("Michael", "lee");
+			User user = new User("Bruce", "wayne");
 			
 			// Send the object to the server
-			socket.send("GET".getBytes(ZMQ.CHARSET));
+			
+			socket.send(this.request.getBytes(ZMQ.CHARSET));
 			
 			//socket.send(user.toString().getBytes(ZMQ.CHARSET));
 			

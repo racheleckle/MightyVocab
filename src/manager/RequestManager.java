@@ -22,11 +22,13 @@ public class RequestManager {
 			String response = client.sendRequest();
 			JSONObject json = new JSONObject(response);
 			
-			if (json.get("isValid").equals("1")) {
-				return User.fromJSON(new JSONObject(json.get("user").toString()));
-			} else {
-				return null;
-			}
+//			if (json.get("isValid").equals("1")) {
+//				return User.fromJSON(new JSONObject(json.get("user").toString()));
+//			} else {
+//				return null;
+//			}
+			
+			return User.fromJSON(new JSONObject(json.get("user").toString()));
 		} catch (Exception exc) {
 			exc.printStackTrace();
 			return null;

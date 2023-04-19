@@ -54,10 +54,10 @@ public class Server extends Thread {
 				System.out.println("Message received: " + message);
 				
 				// Wait for request from the client
-				//String reqType = socket.recvStr();
+				String reqType = socket.recvStr();
 				//String reqData = socket.recvStr(ZMQ.CHARSET);
 
-				//System.out.println("The request: " + reqType);
+				System.out.println("The request: " + reqType);
 				
 				// Handle the request
 				String response = handler.handleRequest(message);
