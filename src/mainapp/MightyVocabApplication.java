@@ -1,5 +1,6 @@
 package mainapp;
 
+import org.json.JSONException;
 import org.zeromq.ZMQ;
 
 import javafx.application.Application;
@@ -11,7 +12,6 @@ import server_comm.Client;
 import server_comm.Server;
 
 public class MightyVocabApplication extends Application {
-//vm arguments: --module-path "${eclipse_home}/javafx-sdk-18.0.2/lib" --add-modules javafx.controls,javafx.fxml
 
 	private static final String SERVER_PATH = "../../server/main.py";
 
@@ -19,7 +19,7 @@ public class MightyVocabApplication extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("../view/SelectSets.fxml"));
+			loader.setLocation(getClass().getResource("../view/LoginPage.fxml"));
 			Pane pane = loader.load();
 			Scene scene = new Scene(pane);
 			primaryStage.setScene(scene);

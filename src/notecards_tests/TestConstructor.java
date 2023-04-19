@@ -20,21 +20,16 @@ class TestConstructor {
 	}
 	
 	@Test
-	void testNullNameContructor() {
-		assertThrows(IllegalArgumentException.class, () -> {
-			// Finish adding test cases
-		});
-	}
 	void testNullNameConstructor() {
 		assertThrows(IllegalArgumentException.class, () -> {
-			Notecards test = new Notecards(null);
+			new Notecards(null);
 		});
 	}
 	
 	@Test
 	void testEmptyNameConstructor() {
 		assertThrows(IllegalArgumentException.class, () -> {
-			Notecards test = new Notecards("");
+			 new Notecards("");
 		});
 	}
   

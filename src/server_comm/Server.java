@@ -1,6 +1,7 @@
 package server_comm;
 
 import java.io.BufferedReader;
+import java.util.ArrayList;
 
 import org.json.JSONException;
 import org.zeromq.ZContext;
@@ -8,13 +9,17 @@ import org.zeromq.ZMQ;
 import org.zeromq.ZMQ.Context;
 import org.zeromq.ZMQ.Socket;
 
+import model_classes.User;
+
 public class Server extends Thread {
 
 	private String path;
 	private volatile boolean exit;
 	private BufferedReader standardInput;
 	private BufferedReader standardError;
-
+	
+	private ArrayList<User> users;
+	
 	/**
 	 * Default Server
 	 */
@@ -33,7 +38,7 @@ public class Server extends Thread {
 		this.path = path;
 	}
 
-	public void connectionsAndStuff() {
+	public void serverConnection() {
 		try (ZContext context = new ZContext()) {
 
 			ZMQ.Socket socket = context.createSocket(ZMQ.REP);
@@ -43,12 +48,26 @@ public class Server extends Thread {
 
 			// Loop to handle requests
 			while (!Thread.currentThread().isInterrupted()) {
+				byte[] reply = socket.recv(0);
+				String message = new String(reply, ZMQ.CHARSET);
+				
+				System.out.println("Message received: " + message);
+				
 				// Wait for request from the client
-				String reqType = socket.recvStr();
-				//String reqData = socket.recvStr();
+				//String reqType = socket.recvStr();
+				//String reqData = socket.recvStr(ZMQ.CHARSET);
 
+				//System.out.println("The request: " + reqType);
+				
 				// Handle the request
-				String response = handler.handleRequest(reqType);
+				String response = handler.handleRequest(message);
+				
+				if (message.equals("exit")) {
+					System.out.println("Server - exiting");
+					socket.close();
+					context.destroy();
+					return;
+				}
 
 				// Send the response back to the client
 				socket.send(response);
@@ -59,7 +78,7 @@ public class Server extends Thread {
 
 	@Override
 	public void run() {
-		this.connectionsAndStuff();
+		this.serverConnection(); 
 //		Context context = ZMQ.context(1);
 //		Socket socket = context.socket(ZMQ.REP);
 //		socket.bind("tcp://127.0.0.1:5555");
@@ -90,33 +109,6 @@ public class Server extends Thread {
 //		socket.close();
 //		context.term();
 
-//		try {
-//			ProcessBuilder builder = new ProcessBuilder("py", this.path);
-//			Process process = builder.start();
-//			Client.connectToSocket();
-//
-//			this.standardInput = new BufferedReader(new InputStreamReader(process.getInputStream()));
-//			this.standardError = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-//
-//			String response = this.standardInput.readLine();
-//			// read output from the command
-//			System.out.println("----Server Responses-----");
-//			while (!this.exit) {
-//				System.out.println(response);
-//				response = this.standardInput.readLine();
-//				if (response == null) {
-//					break;
-//				}
-//			}
-//
-//			// read any errors from the command that was attempted
-//			System.out.println("---Server Error----");
-//			while ((response = this.standardError.readLine()) != null && !this.exit) {
-//				System.err.println(response);
-//			}
-//		} catch (Exception exc) {
-//			exc.printStackTrace();
-//		}
 	}
 
 	private void delay() {

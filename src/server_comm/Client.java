@@ -8,6 +8,7 @@ import org.zeromq.ZMQ.Context;
 import org.zeromq.ZMQ.Socket;
 
 import model_classes.RequestType;
+import model_classes.User;
 
 public class Client extends Thread {
 
@@ -19,7 +20,7 @@ public class Client extends Thread {
 	private boolean responseReceived;
 
 	/**
-	 * Default constructor
+	 * Default constructor for Client
 	 */
 	public Client() {
 
@@ -37,17 +38,21 @@ public class Client extends Thread {
 		this.type = type;
 	}
 
-	public void connectionsAndShit() {
+	public void clientConnection() {
 		try (ZContext context = new ZContext()) {
 			// Create a ZMQ socket
 			ZMQ.Socket socket = context.createSocket(ZMQ.REQ);
 			socket.connect("tcp://127.0.0.1:5555");
 			
 			// Create an object to send to the server
-			
+			User user = new User("Michael", "lee");
 			
 			// Send the object to the server
 			socket.send("GET".getBytes(ZMQ.CHARSET));
+			
+			//socket.send(user.toString().getBytes(ZMQ.CHARSET));
+			
+			//socket.send("exit".getBytes(ZMQ.CHARSET));
 			
 			// Receive the response from the server
 			String response = socket.recvStr();
@@ -60,7 +65,7 @@ public class Client extends Thread {
 
 	/// From Sample Client only
 	public void run() {
-		this.connectionsAndShit();
+		this.clientConnection();
 //		Context context = ZMQ.context(1);
 //
 //		// Socket to talk to server
@@ -81,7 +86,7 @@ public class Client extends Thread {
 //				System.out.println("Theres a match");
 //			}
 //
-//			System.out.println("Client - Received " + response + " " + requestNbr);
+//			System.out.println("Client - Received " + response + " " + requestNbr); 
 //		}
 //
 //		String request = "exit";
@@ -140,7 +145,7 @@ public class Client extends Thread {
 	public static void connectToSocket() {
 		context = ZMQ.context(1);
 		socket = context.socket(ZMQ.REQ);
-		System.out.println("Connecting to MighyVocab Server");
+		System.out.println("Connecting to MighyVocab Server"); 
 		socket.connect("tcp://127.0.0.1:5555");
 	}
 

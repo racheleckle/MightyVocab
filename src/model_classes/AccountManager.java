@@ -19,7 +19,7 @@ public class AccountManager {
 	 * @postcondition none
 	 */
 	public AccountManager() {
-		this.accounts = new HashMap<User, Notecards>();
+		this.accounts = new HashMap<User, Notecards>(); 
 	}
 
 	/**

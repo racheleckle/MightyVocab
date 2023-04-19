@@ -99,17 +99,19 @@ public class NotecardsPageCodeBehind {
 	@FXML
 	private Button viewNotecardButton;
 
+	@FXML
+	private Label welcomeMessageLabel;
+
 	/**
 	 * Notecards Page Code Behind
 	 */
 	public NotecardsPageCodeBehind() {
-
 		this.selectedProperty = new SimpleObjectProperty<Notecard>();
 	}
 
 	@FXML
 	private void initialize() {
-
+		//this.welcomeMessageLabel.textProperty().set(stage.getUserData().toString());
 	}
 
 	/**

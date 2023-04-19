@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="314.0" prefWidth="306.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.NotecardsPageCodeBehind">
+<AnchorPane prefHeight="314.0" prefWidth="306.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.NotecardsPageCodeBehind">
    <children>
       <AnchorPane prefHeight="720.0" prefWidth="960.0" style="-fx-background-color: oldlace;">
          <children>
@@ -75,6 +75,11 @@
                 <TableColumn fx:id="definitionTableColumn" editable="false" prefWidth="325.0" sortType="DESCENDING" text="Definition" />
               </columns>
             </TableView>
+            <Label fx:id="welcomeMessageLabel" layoutX="74.0" layoutY="17.0" prefHeight="22.0" prefWidth="120.0" text="Welcome," textAlignment="CENTER">
+               <font>
+                  <Font name="Cambria" size="18.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>

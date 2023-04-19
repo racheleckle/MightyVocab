@@ -61,6 +61,10 @@ public class LoginPageCodeBehind {
 			stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			scene = new Scene(root);
 			stage.setScene(scene);
+			
+			stage.setUserData(this.viewModel.getActiveUser().toString());
+			System.out.println(stage.getUserData().toString());
+			
 			stage.show();
 		} else {
 			this.invalidCredentialsLabel.setVisible(true);
